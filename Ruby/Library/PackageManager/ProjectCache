@@ -6,8 +6,13 @@ m_ProjectFiles:
     m_ModificationDate:
       serializedVersion: 2
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       ticks: 637824317854498557
     m_Hash: 4092009225
+=======
+      ticks: 637823683630008637
+    m_Hash: 942797434
+>>>>>>> Stashed changes
 =======
       ticks: 637823683630008637
     m_Hash: 942797434
@@ -19,8 +24,13 @@ m_ProjectFiles:
     m_ModificationDate:
       serializedVersion: 2
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       ticks: 637824317854578340
     m_Hash: 3286575039
+=======
+      ticks: 637823683630018845
+    m_Hash: 3493869938
+>>>>>>> Stashed changes
 =======
       ticks: 637823683630018845
     m_Hash: 3493869938
@@ -658,7 +668,11 @@ m_PackageAssets:
       version: 1.15.13
       source: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       resolvedPath: C:\Users\s276323\Documents\GitHub\RubyGame\Ruby\Library\PackageCache\com.unity.collab-proxy@1.15.13
+=======
+      resolvedPath: G:\Github projects\RubyGame\Ruby\Library\PackageCache\com.unity.collab-proxy@1.15.7
+>>>>>>> Stashed changes
 =======
       resolvedPath: G:\Github projects\RubyGame\Ruby\Library\PackageCache\com.unity.collab-proxy@1.15.7
 >>>>>>> Stashed changes
@@ -905,7 +919,11 @@ m_PackageAssets:
       version: 2.0.14
       source: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       resolvedPath: C:\Users\s276323\Documents\GitHub\RubyGame\Ruby\Library\PackageCache\com.unity.ide.visualstudio@2.0.14
+=======
+      resolvedPath: G:\Github projects\RubyGame\Ruby\Library\PackageCache\com.unity.ide.visualstudio@2.0.12
+>>>>>>> Stashed changes
 =======
       resolvedPath: G:\Github projects\RubyGame\Ruby\Library\PackageCache\com.unity.ide.visualstudio@2.0.12
 >>>>>>> Stashed changes
@@ -1000,7 +1018,11 @@ m_PackageAssets:
       version: 1.2.5
       source: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       resolvedPath: C:\Users\s276323\Documents\GitHub\RubyGame\Ruby\Library\PackageCache\com.unity.ide.vscode@1.2.5
+=======
+      resolvedPath: G:\Github projects\RubyGame\Ruby\Library\PackageCache\com.unity.ide.vscode@1.2.4
+>>>>>>> Stashed changes
 =======
       resolvedPath: G:\Github projects\RubyGame\Ruby\Library\PackageCache\com.unity.ide.vscode@1.2.4
 >>>>>>> Stashed changes
@@ -1077,7 +1099,11 @@ m_PackageAssets:
       version: 1.1.31
       source: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       resolvedPath: C:\Users\s276323\Documents\GitHub\RubyGame\Ruby\Library\PackageCache\com.unity.test-framework@1.1.31
+=======
+      resolvedPath: G:\Github projects\RubyGame\Ruby\Library\PackageCache\com.unity.test-framework@1.1.29
+>>>>>>> Stashed changes
 =======
       resolvedPath: G:\Github projects\RubyGame\Ruby\Library\PackageCache\com.unity.test-framework@1.1.29
 >>>>>>> Stashed changes
