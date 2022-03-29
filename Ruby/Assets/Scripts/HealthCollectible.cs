@@ -10,8 +10,10 @@ public class HealthCollectible : MonoBehaviour
 
         if (controller != null)
         {
+            //check if health is not already max
             if (controller.health < controller.maxHealth)
             {
+                //give 1 hp
                 controller.ChangeHealth(1);
                 Destroy(gameObject);
             }

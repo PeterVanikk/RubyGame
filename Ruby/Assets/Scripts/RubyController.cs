@@ -33,8 +33,11 @@ public class RubyController : MonoBehaviour
 
         if (isInvincible)
         {
+            //start counting down
             invincibleTimer -= Time.deltaTime;
+            //check if the timer of 2.0f is done
                 if (invincibleTimer < 0)
+                //remove invincibility
                  isInvincible = false;
         }
     }
