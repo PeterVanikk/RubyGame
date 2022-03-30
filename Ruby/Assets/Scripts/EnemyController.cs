@@ -41,11 +41,12 @@ public class EnemyController : MonoBehaviour
         {
             //set posotion x to (its origional position + ((t)(v))  )
             //multiply speed by direction because direction will be 1 or -1
-            position.y = position.y + Time.deltaTime * speed * direction;; 
+            position.y = position.y + Time.deltaTime * speed * direction;;
+            
         }
         else
         {
-            position.x = position.x + Time.deltaTime * speed * direction;; 
+            position.x = position.x + Time.deltaTime * speed * direction;;
         }
 
         rigidbody2D.MovePosition(position);
