@@ -3316,6 +3316,10 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3771430084070359271, guid: 8fafa6645b9cafd46b0a89ac2236ed0a, type: 3}
+      propertyPath: broken
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3771430084070359271, guid: 8fafa6645b9cafd46b0a89ac2236ed0a, type: 3}
       propertyPath: gravity
       value: -0.5
       objectReference: {fileID: 0}

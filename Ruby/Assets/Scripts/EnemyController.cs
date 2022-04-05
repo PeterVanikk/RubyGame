@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     public float speed;
     public bool vertical;
     public float changeTime = 2.0f;
+    public bool broken;
 
     Rigidbody2D rigidbody2D;
     float timer;
@@ -25,6 +26,11 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //it will not continue as long as the robot is dead(fixed)
+        if (!broken)
+        {
+            return;
+        }
         //start counting down
         timer -= Time.deltaTime;
         //if timer finishes
@@ -68,6 +74,14 @@ public class EnemyController : MonoBehaviour
             //remove 1 hp
             player.ChangeHealth(-1);
         }
+    }
+    public void Fix() //(kill)
+    {
+        //set broken bool to false
+        broken = false;
+        //remove rigidbody2D property
+        rigidbody2D.simulated = false;
+        animator.SetTrigger("Fixed");
     }
 }
 
