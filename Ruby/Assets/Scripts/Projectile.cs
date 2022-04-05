@@ -34,7 +34,7 @@ public class Projectile : MonoBehaviour
         //check if it has the script
         if (e != null)
         {
-            e.Fix();
+           e.changeHealth();
         }
         Destroy(gameObject);
         //add a debug so that we know which gameobject we collided with

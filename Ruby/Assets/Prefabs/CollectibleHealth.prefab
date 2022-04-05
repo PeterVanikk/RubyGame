@@ -122,3 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa64f820154ce1e4a8794818fab5231f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeUntilRespawn: 1
+  currentTimer: 1
+  CollectibleHealth: {fileID: 1397808176647880994}

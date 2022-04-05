@@ -8,6 +8,9 @@ public class EnemyController : MonoBehaviour
     public bool vertical;
     public float changeTime = 2.0f;
     public bool broken;
+    public int maxRobotHealth=5;
+    public int robotHealth { get { return currentRobotHealth; }}
+    int currentRobotHealth;
 
     Rigidbody2D rigidbody2D;
     float timer;
@@ -21,6 +24,7 @@ public class EnemyController : MonoBehaviour
         //set timer to 3.0f
         timer = changeTime;
         animator = GetComponent<Animator>();
+        currentRobotHealth = maxRobotHealth;
     }
 
     // Update is called once per frame
@@ -77,11 +81,21 @@ public class EnemyController : MonoBehaviour
     }
     public void Fix() //(kill)
     {
-        //set broken bool to false
-        broken = false;
-        //remove rigidbody2D property
-        rigidbody2D.simulated = false;
-        animator.SetTrigger("Fixed");
+            //set broken bool to false
+            broken = false;
+            //remove rigidbody2D property
+            rigidbody2D.simulated = false;
+            animator.SetTrigger("Fixed");
+        }
+        public void changeHealth()
+        {
+             currentRobotHealth=currentRobotHealth - 1;
+            Debug.Log("Robot Health is now" + currentRobotHealth + "/" + maxRobotHealth);
+                    
+            
+            if (currentRobotHealth<1)
+            {
+                Fix();
+            }
+        }
     }
-}
-
