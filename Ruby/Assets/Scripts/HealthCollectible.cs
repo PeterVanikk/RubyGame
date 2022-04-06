@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class HealthCollectible : MonoBehaviour
 {
-    public float timeUntilRespawn = 2.0f;
+    public float timeUntilRespawn = 10.0f;
     float currentTimer;
     public GameObject CollectibleHealth;
+    bool generate = false;
+    Rigidbody2D rigidbody2D;
 
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        rigidbody2D = GetComponent<Rigidbody2D>();
         RubyController controller = other.GetComponent<RubyController>();
 
         if (controller != null)
@@ -20,20 +23,23 @@ public class HealthCollectible : MonoBehaviour
             {
                 //give 1 hp
                 controller.ChangeHealth(1);
-                Destroy(gameObject);
-                currentTimer = timeUntilRespawn;
+                
+                
+                StartCoroutine(regenerate());
             }
         }
 
-        void Update() 
-        {
-                currentTimer -= Time.deltaTime;
-
-            if(currentTimer < 0)
-            {
-                GameObject healthObject = Instantiate(CollectibleHealth, transform.position , transform.rotation);
-                Debug.Log("Timer is done");
-            }
-        }
+    }
+    void Update()
+    {
+        
+    }
+    IEnumerator regenerate()
+    {
+        gameObject.GetComponent<Renderer>().enabled=false;
+        Projectile e = other.collider.GetComponent<Projectile>();
+        yield return new WaitForSeconds(2);
+        gameObject.GetComponent<Renderer>().enabled = true;
     }
 }
+

@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         projectileTimer -= Time.deltaTime;
-        if(projectileTimer<0)
+        if (projectileTimer < 0)
         {
             Destroy(gameObject);
         }
@@ -29,18 +29,22 @@ public class Projectile : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D other)
     {
+        if (CogBullet.tag == "Projectile")
+        {
+            return;
+        }
         //check to see if it collided with enemy (has enemyController script) and call it "e"
         EnemyController e = other.collider.GetComponent<EnemyController>();
         //check if it has the script
         if (e != null)
         {
-           e.changeHealth();
+            e.changeHealth();
         }
         Destroy(gameObject);
         //add a debug so that we know which gameobject we collided with
         Debug.Log("Projectile Collision with " + other.gameObject);
         //destroy it (we know it is this gameobject because our function is
         //OnCollisionEnter
-       
+
     }
 }
