@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-        //set timer to 3.0f
+        //set timer to 2.0f
         timer = changeTime;
         animator = GetComponent<Animator>();
         currentRobotHealth = maxRobotHealth;
@@ -30,7 +30,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //it will not continue as long as the robot is dead(fixed)
+        //check to see if bot is already dead
         if (!broken)
         {
             return;
@@ -83,7 +83,7 @@ public class EnemyController : MonoBehaviour
     {
             //set broken bool to false
             broken = false;
-            //remove rigidbody2D property
+            //remove rigidbody2D property so no damage
             rigidbody2D.simulated = false;
             animator.SetTrigger("Fixed");
         }

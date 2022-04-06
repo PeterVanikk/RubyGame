@@ -41,5 +41,6 @@ public class Projectile : MonoBehaviour
         Debug.Log("Projectile Collision with " + other.gameObject);
         //destroy it (we know it is this gameobject because our function is
         //OnCollisionEnter
+       
     }
 }
