@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HealthCollectible : MonoBehaviour
 {
-    public float timeUntilRespawn = 10.0f;
     float currentTimer;
     public GameObject CollectibleHealth;
     bool generate = false;
@@ -36,9 +35,11 @@ public class HealthCollectible : MonoBehaviour
     }
     IEnumerator regenerate()
     {
-        gameObject.GetComponent<Renderer>().enabled=false;
-        yield return new WaitForSeconds(2);
+        gameObject.GetComponent<BoxCollider2D>().enabled=false;
+        gameObject.GetComponent<Renderer>().enabled = false;
+        yield return new WaitForSeconds(5);
         gameObject.GetComponent<Renderer>().enabled = true;
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
     }
 }
 

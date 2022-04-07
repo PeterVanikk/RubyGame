@@ -8,12 +8,14 @@ public class RubyController : MonoBehaviour
     public int maxHealth = 5;
     public float timeInvincible = 2.0f;
     public GameObject projectilePrefab;
+    public float maxTimeProjectile = 1.1f;
 
     public int health { get { return currentHealth; }}
     int currentHealth;
 
     bool isInvincible;
     float invincibleTimer;
+    float currentTimeProjectile;
 
     Rigidbody2D rigidbody2d;
     float horizontal;
@@ -58,10 +60,25 @@ public class RubyController : MonoBehaviour
                 //remove invincibility
                  isInvincible = false;
         }
-        if(Input.GetKeyDown(KeyCode.C))
+        if(Input.GetKey(KeyCode.I))
         {
-            Launch();
-        }   
+            //check if timer is less than 1
+            if (currentTimeProjectile < 1)
+            {
+                //set launch timer to 2 
+                currentTimeProjectile = maxTimeProjectile;
+                Launch();
+            }
+        }
+        currentTimeProjectile -= Time.deltaTime;
+        if(Input.GetKey(KeyCode.J))
+        {
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+        }
+        if(!Input.GetKey(KeyCode.J))
+        {
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
     }
 
     void FixedUpdate()
