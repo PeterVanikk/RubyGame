@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     public int maxRobotHealth=5;
     public int robotHealth { get { return currentRobotHealth; }}
     int currentRobotHealth;
+    public ParticleSystem smokeEffect;
 
     Rigidbody2D rigidbody2D;
     float timer;
@@ -81,6 +82,7 @@ public class EnemyController : MonoBehaviour
     }
     public void Fix() //(kill)
     {
+            smokeEffect.Stop();
             //set broken bool to false
             broken = false;
             //remove rigidbody2D property so no damage
