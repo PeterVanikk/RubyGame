@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    Rigidbody2D rigidbody2d;
     float projectileTimer;
+    Rigidbody2D rigidbody2d;
     //awake because unity does not run "start" if the gameobject was first created.
     void Awake()
     {
@@ -16,35 +16,33 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         projectileTimer -= Time.deltaTime;
-        if (projectileTimer < 0)
+        if(projectileTimer < 0)
         {
             Destroy(gameObject);
         }
     }
     public void Launch(Vector2 direction, float force)
     {
-        //add force with direction
-        rigidbody2d.AddForce(direction * force);
         projectileTimer = 2.0f;
+        rigidbody2d.AddForce(direction * force);
+
     }
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (CogBullet.tag == "Projectile")
-        {
-            return;
-        }
         //check to see if it collided with enemy (has enemyController script) and call it "e"
         EnemyController e = other.collider.GetComponent<EnemyController>();
         //check if it has the script
         if (e != null)
-        {
-            e.changeHealth();
-        }
-        Destroy(gameObject);
+            {
+                e.changeHealth();
+            }
+        if (other.collider.tag != "Projectile") 
+            {
+                Destroy(gameObject);
+            }
         //add a debug so that we know which gameobject we collided with
         Debug.Log("Projectile Collision with " + other.gameObject);
         //destroy it (we know it is this gameobject because our function is
         //OnCollisionEnter
-
     }
 }

@@ -61,7 +61,7 @@ public class RubyController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.C))
         {
             Launch();
-        }
+        }   
     }
 
     void FixedUpdate()
@@ -89,16 +89,11 @@ public class RubyController : MonoBehaviour
         Debug.Log("Ruby's Health is now" + currentHealth + "/" + maxHealth);
     }
     void Launch()
-    {
-        //create the Instantiate at the position of ruby's rigidbody, but a bit up so that it starts near her hands
-        //hence rigidbody2d.posision + (Vector2.up * 0.5f) Quaternion meaning no rotation
+    {   
         GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
-        //new projectile called projectile = (the humungous line above which is also assigned to the projectile we put in the ruby inspector)
         Projectile projectile = projectileObject.GetComponent<Projectile>();
-        //call the launch function and execute with the direction that you are facting with a force of 300N
-        //300 could have been substituted for a public float variable and use that as force
         projectile.Launch(lookDirection, 300);
-        //play "Launch" animation
+
         animator.SetTrigger("Launch");
     }
 }

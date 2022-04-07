@@ -37,7 +37,6 @@ public class HealthCollectible : MonoBehaviour
     IEnumerator regenerate()
     {
         gameObject.GetComponent<Renderer>().enabled=false;
-        Projectile e = other.collider.GetComponent<Projectile>();
         yield return new WaitForSeconds(2);
         gameObject.GetComponent<Renderer>().enabled = true;
     }
