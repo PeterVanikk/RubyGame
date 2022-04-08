@@ -82,12 +82,14 @@ public class EnemyController : MonoBehaviour
     }
     public void Fix() //(kill)
     {
-            smokeEffect.Stop();
             //set broken bool to false
             broken = false;
             //remove rigidbody2D property so no damage
             rigidbody2D.simulated = false;
             animator.SetTrigger("Fixed");
+
+            smokeEffect.Stop();
+        Debug.Log("Dead");
         }
         public void changeHealth()
         {
