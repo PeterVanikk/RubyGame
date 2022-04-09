@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     float projectileTimer;
+    float currentProjectileTime=2.0f;
     Rigidbody2D rigidbody2d;
     //awake because unity does not run "start" if the gameobject was first created.
     void Awake()
@@ -23,7 +24,7 @@ public class Projectile : MonoBehaviour
     }
     public void Launch(Vector2 direction, float force)
     {
-        projectileTimer = 2.0f;
+        projectileTimer = currentProjectileTime;
         rigidbody2d.AddForce(direction * force);
 
     }

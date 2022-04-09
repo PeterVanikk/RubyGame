@@ -89,7 +89,7 @@ public class EnemyController : MonoBehaviour
             animator.SetTrigger("Fixed");
 
             smokeEffect.Stop();
-        Debug.Log("Dead");
+            Debug.Log("Dead");
         }
         public void changeHealth()
         {

@@ -47,10 +47,9 @@ public class RubyController : MonoBehaviour
             //set length as 1
             lookDirection.Normalize();
         }
-        animator.SetFloat("Look X", lookDirection.x);
-        animator.SetFloat("Look Y", lookDirection.y);
-        animator.SetFloat("Speed", move.magnitude);
-
+                animator.SetFloat("Look X", lookDirection.x);
+                animator.SetFloat("Look Y", lookDirection.y);
+                animator.SetFloat("Speed", move.magnitude);
         if (isInvincible)
         {
             //start counting down
