@@ -38,13 +38,11 @@ public class EnemyController : MonoBehaviour
         //check to see if bot is already dead
         if (!broken)
         {
-            Debug.Log("dead");
             smokeTimer -= Time.deltaTime;
 
             if(smokeTimer < 0)
             {
                 smokeEffect.Stop();
-                Debug.Log("TimerDone:)");
             }
             return;
         }
