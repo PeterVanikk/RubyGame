@@ -150,7 +150,7 @@ MonoBehaviour:
   changeTime: 3
   broken: 0
   maxRobotHealth: 1
-  smokeEffect: {fileID: 0}
+  smokeEffect: {fileID: 1865020581018986623, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
 --- !u!95 &4987605466788611331
 Animator:
   serializedVersion: 3

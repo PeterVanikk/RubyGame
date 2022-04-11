@@ -8,14 +8,16 @@ public class EnemyController : MonoBehaviour
     public bool vertical;
     public float changeTime = 2.0f;
     public bool broken;
-    public int maxRobotHealth=5;
-    public int robotHealth { get { return currentRobotHealth; }}
+    public int maxRobotHealth = 5;
+    public int robotHealth { get { return currentRobotHealth; } }
     int currentRobotHealth;
-    public ParticleSystem smokeEffect;
 
+    public ParticleSystem smokeEffect;
     Rigidbody2D rigidbody2D;
     float timer;
     int direction = 1;
+    public float maxSmokeTimer = 5.0f;
+    public float smokeTimer;
 
     Animator animator;
     // Start is called before the first frame update
@@ -26,6 +28,8 @@ public class EnemyController : MonoBehaviour
         timer = changeTime;
         animator = GetComponent<Animator>();
         currentRobotHealth = maxRobotHealth;
+        //smokeEffect = GetComponent<ParticleSystem>();
+        smokeEffect.Stop();
     }
 
     // Update is called once per frame
@@ -34,6 +38,14 @@ public class EnemyController : MonoBehaviour
         //check to see if bot is already dead
         if (!broken)
         {
+            Debug.Log("dead");
+            smokeTimer -= Time.deltaTime;
+
+            if(smokeTimer < 0)
+            {
+                smokeEffect.Stop();
+                Debug.Log("TimerDone:)");
+            }
             return;
         }
         //start counting down
@@ -58,7 +70,7 @@ public class EnemyController : MonoBehaviour
             //set posotion x to (its origional position + ((t)(v))  )
             //multiply speed by direction because direction will be 1 or -1
             position.y = position.y + Time.deltaTime * speed * direction;
-            
+
         }
         else
         {
@@ -82,24 +94,24 @@ public class EnemyController : MonoBehaviour
     }
     public void Fix() //(kill)
     {
-            //set broken bool to false
-            broken = false;
-            //remove rigidbody2D property so no damage
-            rigidbody2D.simulated = false;
-            animator.SetTrigger("Fixed");
+        //set broken bool to false
+        broken = false;
+        //remove rigidbody2D property so no damage
+        rigidbody2D.simulated = false;
+        animator.SetTrigger("Fixed");
 
-            smokeEffect.Stop();
-            Debug.Log("Dead");
-        }
-        public void changeHealth()
+        smokeEffect.Play();
+        smokeTimer = maxSmokeTimer;
+    }
+    public void changeHealth()
+    {
+        currentRobotHealth = currentRobotHealth - 1;
+        Debug.Log("Robot Health is now" + currentRobotHealth + "/" + maxRobotHealth);
+
+
+        if (currentRobotHealth < 1)
         {
-             currentRobotHealth=currentRobotHealth - 1;
-            Debug.Log("Robot Health is now" + currentRobotHealth + "/" + maxRobotHealth);
-                    
-            
-            if (currentRobotHealth<1)
-            {
-                Fix();
-            }
+            Fix();
         }
     }
+}
