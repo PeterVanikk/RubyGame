@@ -17191,6 +17191,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
+      propertyPath: weaponOneTrue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
       propertyPath: projectileAlive
       value: 0
       objectReference: {fileID: 0}
@@ -17200,6 +17204,14 @@ PrefabInstance:
       objectReference: {fileID: 5299524418709842759, guid: c62b98dfdc1ff6c4599b26f82e971c80, type: 3}
     - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
       propertyPath: maxTimeProjectile
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
+      propertyPath: projectilePrefab2
+      value: 
+      objectReference: {fileID: 764812913977067279, guid: 9ccf9e2704c08b64195c17177626d9f0, type: 3}
+    - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
+      propertyPath: maxTimeProjectile2
       value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 3796943718471138367, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}

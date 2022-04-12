@@ -8,21 +8,25 @@ public class RubyController : MonoBehaviour
     public int maxHealth = 5;
     public float timeInvincible = 2.0f;
     public GameObject projectilePrefab;
-    public float maxTimeProjectile = 1.1f;
+    public GameObject projectilePrefab2;
+    public float maxTimeProjectile;
+    public float maxTimeProjectile2;
+    public bool weaponOneTrue;
 
-    public int health { get { return currentHealth; }}
+    public int health { get { return currentHealth; } }
     int currentHealth;
 
     bool isInvincible;
     float invincibleTimer;
     float currentTimeProjectile;
+    float currentTimeProjectile2;
 
     Rigidbody2D rigidbody2d;
     float horizontal;
     float vertical;
 
     Animator animator;
-    Vector2 lookDirection = new Vector2(1,0);
+    Vector2 lookDirection = new Vector2(1, 0);
     // Start is called before the first frame update
     void Start()
     {
@@ -40,41 +44,61 @@ public class RubyController : MonoBehaviour
         //create vector 2 in charge of moving
         Vector2 move = new Vector2(horizontal, vertical);
         //check to see if character is moving
-        if(!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
+        if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
         {
             //look in direction of move vector
             lookDirection.Set(move.x, move.y);
             //set length as 1
             lookDirection.Normalize();
         }
-                animator.SetFloat("Look X", lookDirection.x);
-                animator.SetFloat("Look Y", lookDirection.y);
-                animator.SetFloat("Speed", move.magnitude);
+        animator.SetFloat("Look X", lookDirection.x);
+        animator.SetFloat("Look Y", lookDirection.y);
+        animator.SetFloat("Speed", move.magnitude);
         if (isInvincible)
         {
             //start counting down
             invincibleTimer -= Time.deltaTime;
             //check if the timer of 2.0f is done
-                if (invincibleTimer < 0)
+            if (invincibleTimer < 0)
                 //remove invincibility
-                 isInvincible = false;
+                isInvincible = false;
         }
-        if(Input.GetKey(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            //check if timer is less than 1
-            if (currentTimeProjectile < 1)
+            weaponOneTrue = !weaponOneTrue;
+        }
+        if (Input.GetKey(KeyCode.I))
+        {
+            if (weaponOneTrue == true)
             {
-                //set launch timer to 2 
-                currentTimeProjectile = maxTimeProjectile;
-                Launch();
+                //check if timer is less than 1
+                if (currentTimeProjectile < 1)
+                {
+                    //set launch timer to 2 
+                    currentTimeProjectile = maxTimeProjectile;
+                    Launch();
+                }
+                currentTimeProjectile -= Time.deltaTime;
             }
         }
-        currentTimeProjectile -= Time.deltaTime;
-        if(Input.GetKey(KeyCode.J))
+        if (Input.GetKey(KeyCode.I))
+        {
+            if (weaponOneTrue == false)
+            {
+                Debug.Log("shotweapon2");
+                if (currentTimeProjectile2 < 1.15)
+                {
+                    currentTimeProjectile2 = maxTimeProjectile2;
+                    Launch();
+                }
+                currentTimeProjectile2 -= Time.deltaTime;
+            }
+        }
+        if (Input.GetKey(KeyCode.J))
         {
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
         }
-        if(!Input.GetKey(KeyCode.J))
+        if (!Input.GetKey(KeyCode.J))
         {
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
@@ -100,17 +124,28 @@ public class RubyController : MonoBehaviour
             isInvincible = true;
             invincibleTimer = timeInvincible;
         }
-        
+
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         Debug.Log("Ruby's Health is now" + currentHealth + "/" + maxHealth);
     }
     void Launch()
-    {   
-        GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
-        Projectile projectile = projectileObject.GetComponent<Projectile>();
-        projectile.Launch(lookDirection, 300);
+    {
+        if (weaponOneTrue)
+        {
+            GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+            Projectile projectile = projectileObject.GetComponent<Projectile>();
+            projectile.Launch(lookDirection, 300);
 
-        animator.SetTrigger("Launch");
+            animator.SetTrigger("Launch");
+        }
+        if(!weaponOneTrue)
+        {
+            GameObject projectileObject2 = Instantiate(projectilePrefab2, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+            Projectile2 projectile2 = projectileObject2.GetComponent<Projectile2>();
+            projectile2.Launch(lookDirection, 300);
+
+            animator.SetTrigger("Launch");
+        }
     }
 }
 
