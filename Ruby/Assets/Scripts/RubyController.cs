@@ -85,7 +85,6 @@ public class RubyController : MonoBehaviour
         {
             if (weaponOneTrue == false)
             {
-                Debug.Log("shotweapon2");
                 if (currentTimeProjectile2 < 1.15)
                 {
                     currentTimeProjectile2 = maxTimeProjectile2;
@@ -142,7 +141,7 @@ public class RubyController : MonoBehaviour
         {
             GameObject projectileObject2 = Instantiate(projectilePrefab2, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
             Projectile2 projectile2 = projectileObject2.GetComponent<Projectile2>();
-            projectile2.Launch(lookDirection, 300);
+            projectile2.Launch(lookDirection * Mathf.Sin(45 * Mathf.Deg2Rad), 300);
 
             animator.SetTrigger("Launch");
         }

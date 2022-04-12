@@ -832,6 +832,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmokeEffect 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1865020581018986617, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1865020581018986620, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -17037,6 +17041,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3771430084070359264, guid: 8fafa6645b9cafd46b0a89ac2236ed0a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3771430084070359269, guid: 8fafa6645b9cafd46b0a89ac2236ed0a, type: 3}
       propertyPath: m_Size.x
       value: 1.080699
@@ -17079,7 +17087,7 @@ PrefabInstance:
       objectReference: {fileID: 1150266714}
     - target: {fileID: 3771430084070359271, guid: 8fafa6645b9cafd46b0a89ac2236ed0a, type: 3}
       propertyPath: maxRobotHealth
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3771430084070359275, guid: 8fafa6645b9cafd46b0a89ac2236ed0a, type: 3}
       propertyPath: m_RootOrder

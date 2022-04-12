@@ -8,9 +8,9 @@ public class EnemyController : MonoBehaviour
     public bool vertical;
     public float changeTime = 2.0f;
     public bool broken;
-    public int maxRobotHealth = 5;
-    public int robotHealth { get { return currentRobotHealth; } }
-    int currentRobotHealth;
+    public double maxRobotHealth = 5;
+    public double robotHealth { get { return currentRobotHealth; } }
+    double currentRobotHealth;
 
     public ParticleSystem smokeEffect;
     Rigidbody2D rigidbody2D;
@@ -101,9 +101,20 @@ public class EnemyController : MonoBehaviour
         smokeEffect.Play();
         smokeTimer = maxSmokeTimer;
     }
-    public void changeHealth()
+    public void changeHealth1()
     {
         currentRobotHealth = currentRobotHealth - 1;
+        Debug.Log("Robot Health is now" + currentRobotHealth + "/" + maxRobotHealth);
+
+
+        if (currentRobotHealth < 1)
+        {
+            Fix();
+        }
+    }
+    public void changeHealth2()
+    {
+        currentRobotHealth = currentRobotHealth - 0.25;
         Debug.Log("Robot Health is now" + currentRobotHealth + "/" + maxRobotHealth);
 
 

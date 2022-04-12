@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile2 : MonoBehaviour
 {
     float projectileTimer;
-    float currentProjectileTime = 0.4f;
+    float currentProjectileTime = 0.38f;
     Rigidbody2D rigidbody2d;
     //awake because unity does not run "start" if the gameobject was first created.
     void Awake()
@@ -35,7 +35,7 @@ public class Projectile2 : MonoBehaviour
         //check if it has the script
         if (e != null)
         {
-            e.changeHealth();
+            e.changeHealth2();
         }
         if (other.collider.tag != "Projectile")
         {

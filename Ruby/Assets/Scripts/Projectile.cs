@@ -35,7 +35,7 @@ public class Projectile : MonoBehaviour
         //check if it has the script
         if (e != null)
             {
-                e.changeHealth();
+                e.changeHealth1();
             }
         if (other.collider.tag != "Projectile") 
             {
