@@ -17087,7 +17087,7 @@ PrefabInstance:
       objectReference: {fileID: 1150266714}
     - target: {fileID: 3771430084070359271, guid: 8fafa6645b9cafd46b0a89ac2236ed0a, type: 3}
       propertyPath: maxRobotHealth
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3771430084070359275, guid: 8fafa6645b9cafd46b0a89ac2236ed0a, type: 3}
       propertyPath: m_RootOrder
