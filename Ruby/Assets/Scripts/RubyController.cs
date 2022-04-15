@@ -12,6 +12,7 @@ public class RubyController : MonoBehaviour
     public float maxTimeProjectile;
     public float maxTimeProjectile2;
     public bool weaponOneTrue;
+    public bool dash;
 
     public int health { get { return currentHealth; } }
     int currentHealth;
@@ -20,13 +21,18 @@ public class RubyController : MonoBehaviour
     float invincibleTimer;
     float currentTimeProjectile;
     float currentTimeProjectile2;
+    public float dashTime = 0.3f;
+    public float currentDashTime;
 
     Rigidbody2D rigidbody2d;
     float horizontal;
     float vertical;
+    private float dashspeed = 5f;
+    private Vector3 rubyPosition;
 
     Animator animator;
     Vector2 lookDirection = new Vector2(1, 0);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -100,6 +106,27 @@ public class RubyController : MonoBehaviour
         if (!Input.GetKey(KeyCode.J))
         {
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+   
+        if (Input.GetKeyDown(KeyCode.LeftShift)) 
+        {
+            dash=true;
+            currentDashTime = dashTime;
+        }
+        if (dash==true) 
+        {
+            Vector2 positionn = rigidbody2d.position;
+            //dash
+            //this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position,rubyPosition,dashspeed * vertical * Time.deltaTime);
+            //positionn.x = positionn.x + dashspeed * horizontal * Time.deltaTime;
+            //positionn.y = positionn.y + dashspeed * vertical * Time.deltaTime;
+            Debug.Log("dash");
+            currentDashTime -= Time.deltaTime;
+            if(currentDashTime<0)
+            {
+                dash = false;
+                currentDashTime = dashTime;
+            }
         }
     }
 
