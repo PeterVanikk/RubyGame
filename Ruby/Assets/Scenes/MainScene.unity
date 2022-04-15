@@ -17589,7 +17589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
       propertyPath: dashTime
-      value: 0.3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
       propertyPath: maxHealth

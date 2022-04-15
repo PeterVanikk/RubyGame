@@ -38,6 +38,7 @@ public class RubyController : MonoBehaviour
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        transform.position = new Vector3(0,0,0);
 
         currentHealth = maxHealth;
     }
@@ -109,23 +110,27 @@ public class RubyController : MonoBehaviour
         }
    
         if (Input.GetKeyDown(KeyCode.LeftShift)) 
-        {
-            dash=true;
-            currentDashTime = dashTime;
-        }
+            {
+                if(currentDashTime <= 0)
+                {
+                    dash=true;
+                    currentDashTime = dashTime;
+                    Debug.Log("Shift");
+                }
+            }
         if (dash==true) 
         {
-            Vector2 positionn = rigidbody2d.position;
             //dash
-            //this.gameObject.transform.position = Vector3.MoveTowards(this.gameObject.transform.position,rubyPosition,dashspeed * vertical * Time.deltaTime);
-            //positionn.x = positionn.x + dashspeed * horizontal * Time.deltaTime;
-            //positionn.y = positionn.y + dashspeed * vertical * Time.deltaTime;
-            Debug.Log("dash");
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+            Vector2 position = transform.position;
+            position.x = position.x + dashspeed * horizontal * Time.deltaTime;
+            position.y = position.y + dashspeed * vertical * Time.deltaTime;
+            transform.position = position;
             currentDashTime -= Time.deltaTime;
-            if(currentDashTime<0)
+            if(currentDashTime<=0)
             {
                 dash = false;
-                currentDashTime = dashTime;
             }
         }
     }
