@@ -12,7 +12,7 @@ public class RubyController : MonoBehaviour
     public float maxTimeProjectile;
     public float maxTimeProjectile2;
     public bool weaponOneTrue;
-    public bool dash;
+    public bool dash=false;
 
     public int health { get { return currentHealth; } }
     int currentHealth;
@@ -29,6 +29,10 @@ public class RubyController : MonoBehaviour
     float vertical;
     private float dashspeed = 5f;
     private Vector3 rubyPosition;
+    public bool shiftDown;
+    public float dashCooldown=3f;
+    public float currentDashCooldown;
+    public bool dashAllowed;
 
     Animator animator;
     Vector2 lookDirection = new Vector2(1, 0);
@@ -109,16 +113,25 @@ public class RubyController : MonoBehaviour
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
    
-        if (Input.GetKeyDown(KeyCode.LeftShift)) 
+        /*if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            shiftDown=true;
+            currentDashCooldown = dashCooldown;
+        }
+            if(shiftDown==true)
             {
-                if(currentDashTime <= 0)
-                {
-                    dash=true;
-                    currentDashTime = dashTime;
-                    Debug.Log("Shift");
-                }
+                currentDashCooldown -= Time.deltaTime;
             }
-        if (dash==true) 
+        if(currentDashCooldown<0)
+        {
+            shiftDown=false;
+        }
+        if(currentDashTime <= 0)
+        {
+            dash=true;
+            currentDashTime = dashTime;
+        }
+        if (shiftDown==false)
         {
             //dash
             float horizontal = Input.GetAxis("Horizontal");
@@ -128,13 +141,47 @@ public class RubyController : MonoBehaviour
             position.y = position.y + dashspeed * vertical * Time.deltaTime;
             transform.position = position;
             currentDashTime -= Time.deltaTime;
-            if(currentDashTime<=0)
-            {
-                dash = false;
-            }
-        }
+        } 
     }
+    */
+        //COOLDOWN TIMER
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            shiftDown=true;
+            currentDashCooldown = dashCooldown;
+        }
+        if(shiftDown==true)
+        {
+            currentDashCooldown -= Time.deltaTime;
+        }
+        if(currentDashCooldown<0)
+        {
+            shiftDown=false;
+            dashAllowed=true;
+        }   
 
+        //DASH
+        if(dashAllowed)
+        {
+            if(currentDashTime <= 0)
+        {
+            dash=true;
+            currentDashTime = dashTime;
+        }
+        if (shiftDown==false)
+        {
+            //dash
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+            Vector2 position = transform.position;
+            position.x = position.x + dashspeed * horizontal * Time.deltaTime;
+            position.y = position.y + dashspeed * vertical * Time.deltaTime;
+            transform.position = position;
+            currentDashTime -= Time.deltaTime;
+        } 
+        }
+
+    }
     void FixedUpdate()
     {
         Vector2 position = rigidbody2d.position;
