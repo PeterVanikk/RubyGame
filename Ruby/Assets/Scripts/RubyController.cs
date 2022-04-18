@@ -27,12 +27,15 @@ public class RubyController : MonoBehaviour
     Rigidbody2D rigidbody2d;
     float horizontal;
     float vertical;
-    private float dashspeed = 5f;
+    private float dashspeed = 7f;
+    public float diagonalDashSpeed = 0.01f;
     private Vector3 rubyPosition;
     public bool shiftDown;
     public float dashCooldown=3f;
     public float currentDashCooldown;
     public bool dashAllowed;
+    public ParticleSystem smokeEffect2;
+    public bool dashActive=false;
 
     Animator animator;
     Vector2 lookDirection = new Vector2(1, 0);
@@ -45,6 +48,7 @@ public class RubyController : MonoBehaviour
         transform.position = new Vector3(0,0,0);
 
         currentHealth = maxHealth;
+        smokeEffect2.Stop();
     }
 
     // Update is called once per frame
@@ -112,75 +116,52 @@ public class RubyController : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-   
-        /*if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
         {
-            shiftDown=true;
-            currentDashCooldown = dashCooldown;
-        }
-            if(shiftDown==true)
+            if(Input.GetKeyDown(KeyCode.LeftShift))
             {
-                currentDashCooldown -= Time.deltaTime;
+                if(dash==true)
+                {
+                    return;
+                }            
+                dash=true;
+                currentDashCooldown = dashCooldown;
+                currentDashTime = dashTime;
+                dashAllowed=false;
             }
-        if(currentDashCooldown<0)
-        {
-            shiftDown=false;
+            if(dash==true)
+            {
+                if(currentDashTime>0)
+                {
+                    //dash
+                    float horizontal = Input.GetAxis("Horizontal");
+                    float vertical = Input.GetAxis("Vertical");
+                    Vector2 position = transform.position;
+                    if(!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
+                    {
+                    position.x = position.x + dashspeed * horizontal * Time.deltaTime;
+                    position.y = position.y + dashspeed * vertical * Time.deltaTime;
+                    }
+                    transform.position = position;
+                    currentDashTime -= Time.deltaTime;
+                }
+                currentDashCooldown -= Time.deltaTime;
+                currentDashTime-=Time.deltaTime;
+            }
+            if(currentDashCooldown<0)
+            {
+                dash=false;
+                dashAllowed=true;
+            } 
         }
-        if(currentDashTime <= 0)
+        if(currentDashTime>0)
         {
-            dash=true;
-            currentDashTime = dashTime;
+            dashActive=true;
         }
-        if (shiftDown==false)
+        else
         {
-            //dash
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
-            Vector2 position = transform.position;
-            position.x = position.x + dashspeed * horizontal * Time.deltaTime;
-            position.y = position.y + dashspeed * vertical * Time.deltaTime;
-            transform.position = position;
-            currentDashTime -= Time.deltaTime;
-        } 
-    }
-    */
-        //COOLDOWN TIMER
-        if(Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            shiftDown=true;
-            currentDashCooldown = dashCooldown;
+            dashActive=false;
         }
-        if(shiftDown==true)
-        {
-            currentDashCooldown -= Time.deltaTime;
-        }
-        if(currentDashCooldown<0)
-        {
-            shiftDown=false;
-            dashAllowed=true;
-        }   
-
-        //DASH
-        if(dashAllowed)
-        {
-            if(currentDashTime <= 0)
-        {
-            dash=true;
-            currentDashTime = dashTime;
-        }
-        if (shiftDown==false)
-        {
-            //dash
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
-            Vector2 position = transform.position;
-            position.x = position.x + dashspeed * horizontal * Time.deltaTime;
-            position.y = position.y + dashspeed * vertical * Time.deltaTime;
-            transform.position = position;
-            currentDashTime -= Time.deltaTime;
-        } 
-        }
-
     }
     void FixedUpdate()
     {

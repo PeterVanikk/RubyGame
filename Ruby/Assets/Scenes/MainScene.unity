@@ -916,7 +916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1865020581018986620, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.036000013
+      value: -0.035999976
       objectReference: {fileID: 0}
     - target: {fileID: 1865020581018986620, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
       propertyPath: m_LocalPosition.y
@@ -956,6 +956,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+--- !u!1001 &1287393481
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 290187323}
+    m_Modifications:
+    - target: {fileID: 1865020581018986617, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+      propertyPath: m_Name
+      value: SmokeEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865020581018986620, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865020581018986620, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.24068666
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865020581018986620, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865020581018986620, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865020581018986620, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865020581018986620, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865020581018986620, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865020581018986620, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865020581018986620, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865020581018986620, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865020581018986620, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+--- !u!198 &1287393482 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1865020581018986623, guid: cd4a06882ecc2de4ca9bd6fe22eb3744, type: 3}
+  m_PrefabInstance: {fileID: 1287393481}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1345904743
 GameObject:
   m_ObjectHideFlags: 0
@@ -17589,12 +17651,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
       propertyPath: dashTime
-      value: 0.35
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
       propertyPath: maxHealth
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
+      propertyPath: smokeEffect
+      value: 
+      objectReference: {fileID: 1287393482}
+    - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
+      propertyPath: dashCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
+      propertyPath: smokeEffect2
+      value: 
+      objectReference: {fileID: 1287393482}
     - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
       propertyPath: weaponOneTrue
       value: 1
@@ -17607,6 +17685,10 @@ PrefabInstance:
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 5299524418709842759, guid: c62b98dfdc1ff6c4599b26f82e971c80, type: 3}
+    - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
+      propertyPath: diagonalDashSpeed
+      value: 1e-20
+      objectReference: {fileID: 0}
     - target: {fileID: 3796943718471138366, guid: e71b5df62ced9aa479b06eda3811d3dc, type: 3}
       propertyPath: maxTimeProjectile
       value: 1.25
