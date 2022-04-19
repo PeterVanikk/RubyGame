@@ -13,7 +13,7 @@ public class RubyController : MonoBehaviour
     public float maxTimeProjectile;
     public float maxTimeProjectile2;
     public bool weaponOneTrue;
-    public bool dash=false;
+    public bool dash = false;
 
     public int health { get { return currentHealth; } }
     int currentHealth;
@@ -32,11 +32,11 @@ public class RubyController : MonoBehaviour
     public float diagonalDashSpeed = 0.01f;
     private Vector3 rubyPosition;
     public bool shiftDown;
-    public float dashCooldown=3f;
+    public float dashCooldown = 3f;
     public float currentDashCooldown;
     public bool dashAllowed;
     public ParticleSystem smokeEffect2;
-    public bool dashActive=false;
+    public bool dashActive = false;
 
     Animator animator;
     Vector2 lookDirection = new Vector2(1, 0);
@@ -46,11 +46,12 @@ public class RubyController : MonoBehaviour
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        transform.position = new Vector3(0,0,0);
+        animator = GetComponent<Animator>();
+        transform.position = new Vector3(0, 0, 0);
 
         currentHealth = maxHealth;
         smokeEffect2.Stop();
-        dashAllowed=true;
+        dashAllowed = true;
     }
 
     // Update is called once per frame
@@ -113,6 +114,7 @@ public class RubyController : MonoBehaviour
         if (Input.GetKey(KeyCode.J))
         {
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+            //animator.enabled = false;
         }
         if (!Input.GetKey(KeyCode.J))
         {
@@ -120,34 +122,34 @@ public class RubyController : MonoBehaviour
         }
         if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
         {
-            if(Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                if(dashAllowed)
+                if (dashAllowed)
                 {
                     GameObject smokeObject = Instantiate(smokePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
                 }
-                if(dash==true)
+                if (dash == true)
                 {
                     return;
-                }            
-                dash=true;
+                }
+                dash = true;
                 currentDashCooldown = dashCooldown;
                 currentDashTime = dashTime;
-                dashAllowed=false;
+                dashAllowed = false;
             }
-            if(dash==true)
+            if (dash == true)
             {
-                if(currentDashTime>0)
+                if (currentDashTime > 0)
                 {
                     //dash
                     float horizontal = Input.GetAxis("Horizontal");
                     float vertical = Input.GetAxis("Vertical");
                     Vector2 position = transform.position;
                     //Vector3 dashtranslate = new Vector3(0.01f, 0f, 0f);
-                    if(!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
+                    if (!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
                     {
-                    position.x = position.x + dashspeed * horizontal * Time.deltaTime;
-                    position.y = position.y + dashspeed * vertical * Time.deltaTime;
+                        position.x = position.x + dashspeed * horizontal * Time.deltaTime;
+                        position.y = position.y + dashspeed * vertical * Time.deltaTime;
                     }
                     /*if(lookDirection.x>0)
                     dash in platformer
@@ -158,26 +160,26 @@ public class RubyController : MonoBehaviour
                     {
                         transform.Translate(-dashtranslate);
                     }
-                    */                    
+                    */
                     transform.position = position;
                     currentDashTime -= Time.deltaTime;
                 }
                 currentDashCooldown -= Time.deltaTime;
-                currentDashTime-=Time.deltaTime;
+                currentDashTime -= Time.deltaTime;
             }
-            if(currentDashCooldown<0)
+            if (currentDashCooldown < 0)
             {
-                dash=false;
-                dashAllowed=true;
-            } 
+                dash = false;
+                dashAllowed = true;
+            }
         }
-        if(currentDashTime>0)
+        if (currentDashTime > 0)
         {
-            dashActive=true;
+            dashActive = true;
         }
         else
         {
-            dashActive=false;
+            dashActive = false;
         }
     }
     void FixedUpdate()
@@ -202,7 +204,7 @@ public class RubyController : MonoBehaviour
         }
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        Debug.Log("Ruby's Health is now" + currentHealth + "/" + maxHealth);
+        UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
     }
     void Launch()
     {
@@ -214,7 +216,7 @@ public class RubyController : MonoBehaviour
 
             animator.SetTrigger("Launch");
         }
-        if(!weaponOneTrue)
+        if (!weaponOneTrue)
         {
             GameObject projectileObject2 = Instantiate(projectilePrefab2, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
             Projectile2 projectile2 = projectileObject2.GetComponent<Projectile2>();
