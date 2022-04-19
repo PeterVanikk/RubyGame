@@ -9,6 +9,7 @@ public class RubyController : MonoBehaviour
     public float timeInvincible = 2.0f;
     public GameObject projectilePrefab;
     public GameObject projectilePrefab2;
+    public GameObject smokePrefab;
     public float maxTimeProjectile;
     public float maxTimeProjectile2;
     public bool weaponOneTrue;
@@ -49,6 +50,7 @@ public class RubyController : MonoBehaviour
 
         currentHealth = maxHealth;
         smokeEffect2.Stop();
+        dashAllowed=true;
     }
 
     // Update is called once per frame
@@ -120,6 +122,10 @@ public class RubyController : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.LeftShift))
             {
+                if(dashAllowed)
+                {
+                    GameObject smokeObject = Instantiate(smokePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+                }
                 if(dash==true)
                 {
                     return;
@@ -137,11 +143,22 @@ public class RubyController : MonoBehaviour
                     float horizontal = Input.GetAxis("Horizontal");
                     float vertical = Input.GetAxis("Vertical");
                     Vector2 position = transform.position;
+                    //Vector3 dashtranslate = new Vector3(0.01f, 0f, 0f);
                     if(!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
                     {
                     position.x = position.x + dashspeed * horizontal * Time.deltaTime;
                     position.y = position.y + dashspeed * vertical * Time.deltaTime;
                     }
+                    /*if(lookDirection.x>0)
+                    dash in platformer
+                    {
+                    transform.Translate(dashtranslate);
+                    }
+                    if(lookDirection.x<0)
+                    {
+                        transform.Translate(-dashtranslate);
+                    }
+                    */                    
                     transform.position = position;
                     currentDashTime -= Time.deltaTime;
                 }
@@ -207,4 +224,5 @@ public class RubyController : MonoBehaviour
         }
     }
 }
+/* for dash in 2d game, translate in x look direction and block movement in y position */
 

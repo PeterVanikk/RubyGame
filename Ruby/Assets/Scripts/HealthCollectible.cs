@@ -21,13 +21,10 @@ public class HealthCollectible : MonoBehaviour
             if (controller.health < controller.maxHealth)
             {
                 //give 1 hp
-                controller.ChangeHealth(1);
-                
-                
+                controller.ChangeHealth(1);               
                 StartCoroutine(regenerate());
             }
         }
-
     }
     void Update()
     {
