@@ -29,9 +29,7 @@ public class RubyController : MonoBehaviour
     float horizontal;
     float vertical;
     private float dashspeed = 7f;
-    public float diagonalDashSpeed = 0.01f;
     private Vector3 rubyPosition;
-    public bool shiftDown;
     public float dashCooldown = 3f;
     public float currentDashCooldown;
     public bool dashAllowed;
@@ -85,30 +83,34 @@ public class RubyController : MonoBehaviour
         {
             weaponOneTrue = !weaponOneTrue;
         }
-        if (Input.GetKey(KeyCode.I))
+
+        if (dashActive == false)
         {
-            if (weaponOneTrue == true)
+            if (Input.GetKey(KeyCode.I))
             {
-                //check if timer is less than 1
-                if (currentTimeProjectile < 1)
+                if (weaponOneTrue == true)
                 {
-                    //set launch timer to 2 
-                    currentTimeProjectile = maxTimeProjectile;
-                    Launch();
+                    //check if timer is less than 1
+                    if (currentTimeProjectile < 1)
+                    {
+                        //set launch timer to 2 
+                        currentTimeProjectile = maxTimeProjectile;
+                        Launch();
+                    }
+                    currentTimeProjectile -= Time.deltaTime;
                 }
-                currentTimeProjectile -= Time.deltaTime;
             }
-        }
-        if (Input.GetKey(KeyCode.I))
-        {
-            if (weaponOneTrue == false)
+            if (Input.GetKey(KeyCode.I))
             {
-                if (currentTimeProjectile2 < 1.15)
+                if (weaponOneTrue == false)
                 {
-                    currentTimeProjectile2 = maxTimeProjectile2;
-                    Launch();
+                    if (currentTimeProjectile2 < 1.15)
+                    {
+                        currentTimeProjectile2 = maxTimeProjectile2;
+                        Launch();
+                    }
+                    currentTimeProjectile2 -= Time.deltaTime;
                 }
-                currentTimeProjectile2 -= Time.deltaTime;
             }
         }
         if (Input.GetKey(KeyCode.J))
@@ -181,6 +183,15 @@ public class RubyController : MonoBehaviour
         {
             dashActive = false;
         }
+
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 1.5f, LayerMask.GetMask("NPC"));
+            if (hit.collider != null)
+            {
+                Debug.Log("it worked");
+            }
+        }
     }
     void FixedUpdate()
     {
@@ -212,7 +223,7 @@ public class RubyController : MonoBehaviour
         {
             GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
             Projectile projectile = projectileObject.GetComponent<Projectile>();
-            projectile.Launch(lookDirection, 300);
+            projectile.Launch(lookDirection, 400);
 
             animator.SetTrigger("Launch");
         }
@@ -226,5 +237,5 @@ public class RubyController : MonoBehaviour
         }
     }
 }
-/* for dash in 2d game, translate in x look direction and block movement in y position */
+/* for dash in 2d game, translate in x look direction and block movement in y direction */
 
