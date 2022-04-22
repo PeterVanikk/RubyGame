@@ -184,12 +184,16 @@ public class RubyController : MonoBehaviour
             dashActive = false;
         }
 
-        if(Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 1.5f, LayerMask.GetMask("NPC"));
             if (hit.collider != null)
             {
-                Debug.Log("it worked");
+                JambiScript character = hit.collider.GetComponent<JambiScript>();
+                if (character != null)
+                {
+                    character.DisplayDialog();
+                }
             }
         }
     }
@@ -219,21 +223,24 @@ public class RubyController : MonoBehaviour
     }
     void Launch()
     {
-        if (weaponOneTrue)
+        if (!dashActive)
         {
-            GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
-            Projectile projectile = projectileObject.GetComponent<Projectile>();
-            projectile.Launch(lookDirection, 400);
+            if (weaponOneTrue)
+            {
+                GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+                Projectile projectile = projectileObject.GetComponent<Projectile>();
+                projectile.Launch(lookDirection, 400);
 
-            animator.SetTrigger("Launch");
-        }
-        if (!weaponOneTrue)
-        {
-            GameObject projectileObject2 = Instantiate(projectilePrefab2, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
-            Projectile2 projectile2 = projectileObject2.GetComponent<Projectile2>();
-            projectile2.Launch(lookDirection, 300);
+                animator.SetTrigger("Launch");
+            }
+            if (!weaponOneTrue)
+            {
+                GameObject projectileObject2 = Instantiate(projectilePrefab2, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+                Projectile2 projectile2 = projectileObject2.GetComponent<Projectile2>();
+                projectile2.Launch(lookDirection, 300);
 
-            animator.SetTrigger("Launch");
+                animator.SetTrigger("Launch");
+            }
         }
     }
 }
