@@ -245,4 +245,3 @@ public class RubyController : MonoBehaviour
     }
 }
 /* for dash in 2d game, translate in x look direction and block movement in y direction */
-
