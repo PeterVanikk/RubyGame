@@ -36,7 +36,6 @@ public class RubyController : MonoBehaviour
     public float dashCooldown = 3f;
     public float currentDashCooldown;
     public bool dashAllowed;
-    public ParticleSystem smokeEffect2;
     public bool dashActive = false;
 
     Animator animator;
@@ -51,7 +50,6 @@ public class RubyController : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
 
         currentHealth = maxHealth;
-        smokeEffect2.Stop();
         dashAllowed = true;
 
         audioSource = GetComponent<AudioSource>();
@@ -228,24 +226,54 @@ public class RubyController : MonoBehaviour
     }
     void Launch()
     {
-        if (!dashActive)
+        if (!isInvincible)
         {
-            audioSource.PlayOneShot(throwCog);
-            if (weaponOneTrue)
+            if (!dashActive)
             {
-                GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
-                Projectile projectile = projectileObject.GetComponent<Projectile>();
-                projectile.Launch(lookDirection, 400);
+                audioSource.PlayOneShot(throwCog);
+                if (weaponOneTrue)
+                {
+                    GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+                    Projectile projectile = projectileObject.GetComponent<Projectile>();
+                    projectile.Launch(lookDirection, 400);
 
-                animator.SetTrigger("Launch");
-            }
-            if (!weaponOneTrue)
-            {
-                GameObject projectileObject2 = Instantiate(projectilePrefab2, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
-                Projectile2 projectile2 = projectileObject2.GetComponent<Projectile2>();
-                projectile2.Launch(lookDirection, 300);
+                    animator.SetTrigger("Launch");
+                }
+                if (!weaponOneTrue)
+                {
+                    if (lookDirection.y == 0)
+                    {
+                        GameObject projectileObject2lower = Instantiate(projectilePrefab2, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+                        Projectile2 projectile2 = projectileObject2lower.GetComponent<Projectile2>();
+                        projectile2.Launch(lookDirection + Vector2.down * 0.5f, 300);
 
-                animator.SetTrigger("Launch");
+                        GameObject projectileObject2mid = Instantiate(projectilePrefab2, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+                        Projectile2 projectile2mid = projectileObject2mid.GetComponent<Projectile2>();
+                        projectile2mid.Launch(lookDirection, 300);
+
+                        GameObject projectileObject2higher = Instantiate(projectilePrefab2, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+                        Projectile2 projectile2high = projectileObject2higher.GetComponent<Projectile2>();
+                        projectile2high.Launch(lookDirection + Vector2.up * 0.5f, 300);
+
+                        animator.SetTrigger("Launch");
+                    }
+                    if (lookDirection.x == 0)
+                    {
+                        GameObject projectileObject2left = Instantiate(projectilePrefab2, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+                        Projectile2 projectile2 = projectileObject2left.GetComponent<Projectile2>();
+                        projectile2.Launch(lookDirection + Vector2.left * 0.5f, 300);
+
+                        GameObject projectileObject2middle = Instantiate(projectilePrefab2, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+                        Projectile2 projectile2middle = projectileObject2middle.GetComponent<Projectile2>();
+                        projectile2middle.Launch(lookDirection, 300);
+
+                        GameObject projectileObject2rights = Instantiate(projectilePrefab2, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+                        Projectile2 projectile2right = projectileObject2rights.GetComponent<Projectile2>();
+                        projectile2right.Launch(lookDirection + Vector2.right * 0.5f, 300);
+
+                        animator.SetTrigger("Launch");
+                    }
+                }
             }
         }
     }
