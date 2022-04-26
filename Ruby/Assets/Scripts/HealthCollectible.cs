@@ -8,6 +8,7 @@ public class HealthCollectible : MonoBehaviour
     public GameObject CollectibleHealth;
     bool generate = false;
     Rigidbody2D rigidbody2D;
+    public AudioClip collectedClip;
 
 
     void OnTriggerEnter2D(Collider2D other)
@@ -23,6 +24,8 @@ public class HealthCollectible : MonoBehaviour
                 //give 1 hp
                 controller.ChangeHealth(1);               
                 StartCoroutine(regenerate());
+
+                controller.PlaySound(collectedClip);
             }
         }
     }

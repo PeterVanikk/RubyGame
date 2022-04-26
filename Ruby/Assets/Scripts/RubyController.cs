@@ -15,6 +15,9 @@ public class RubyController : MonoBehaviour
     public bool weaponOneTrue;
     public bool dash = false;
 
+    AudioSource audioSource;
+    public AudioClip throwCog;
+
     public int health { get { return currentHealth; } }
     int currentHealth;
 
@@ -50,6 +53,8 @@ public class RubyController : MonoBehaviour
         currentHealth = maxHealth;
         smokeEffect2.Stop();
         dashAllowed = true;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -225,6 +230,7 @@ public class RubyController : MonoBehaviour
     {
         if (!dashActive)
         {
+            audioSource.PlayOneShot(throwCog);
             if (weaponOneTrue)
             {
                 GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
@@ -243,5 +249,10 @@ public class RubyController : MonoBehaviour
             }
         }
     }
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
+    }
+
 }
 /* for dash in 2d game, translate in x look direction and block movement in y direction */

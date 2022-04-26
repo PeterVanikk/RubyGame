@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
     int direction = 1;
     public float maxSmokeTimer = 5.0f;
     public float smokeTimer;
+    public AudioClip walking;
 
     Animator animator;
     // Start is called before the first frame update
