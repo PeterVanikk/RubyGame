@@ -46,7 +46,6 @@ public class RubyController : MonoBehaviour
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        animator = GetComponent<Animator>();
         transform.position = new Vector3(0, 0, 0);
 
         currentHealth = maxHealth;
