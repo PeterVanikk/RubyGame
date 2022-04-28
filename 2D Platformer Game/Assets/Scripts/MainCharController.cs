@@ -4,36 +4,49 @@ using UnityEngine;
 
 public class MainCharController : MonoBehaviour
 {
-    public float speed;
+    public float speed = 3.0f;
+
+    bool isInvincible;
+    float invincibleTimer;
 
     Rigidbody2D rigidbody2d;
+
     float horizontal;
-
-    private SpriteRenderer spriteRenderer;
-
-    Vector2 lookDirection = new Vector2(1, 0);
+    float vertical;
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody2d = GetComponent<Rigidbody2D>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
         horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
 
-        Vector2 move = new Vector2(horizontal, 0);
+        Vector2 move = new Vector2(horizontal, vertical);
 
+        if (horizontal > 0)
+        {
+            transform.localScale = new Vector2(1f, 1f);
+        }
+        if (horizontal < 0)
+        {
+            transform.localScale = new Vector2(-1f, 1f);
+        }
         if (!Mathf.Approximately(move.x, 0.0f))
         {
-            spriteRenderer.flipX = true;
+            animator.SetBool("IsRunning", true);
+        }
+        if(Mathf.Approximately(move.x, 0.0f))
+        {
+            animator.SetBool("IsRunning", false);
         }
     }
-    
+
     void FixedUpdate()
     {
         Vector2 position = rigidbody2d.position;
