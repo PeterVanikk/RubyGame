@@ -966,6 +966,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1616817124572477019, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 054d969ecbe8d254d964353f59725f6c, type: 2}
+    - target: {fileID: 2102407894088263645, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091016672318937940, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
+      propertyPath: dashTime
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 4091016672318937940, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
       propertyPath: dashForce
       value: 0.021

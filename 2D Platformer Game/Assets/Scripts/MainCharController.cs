@@ -22,6 +22,7 @@ public class MainCharController : MonoBehaviour
     public bool dashAllowed;
     public bool dashActive = false;
     public bool dash = false;
+    public bool nodash;
 
     Animator animator;
     void Start()
@@ -33,7 +34,7 @@ public class MainCharController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetButtonDown("Jump") && IsGrounded() && nodash==false)
         {
             Jump();
         }
@@ -59,44 +60,49 @@ public class MainCharController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.J))
         {
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
-            //animator.enabled = false;
+            nodash = true;
+            if (rigidbody2d.velocity.y == 0)
+            {
+                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+                animator.SetBool("isRunning", false);
+            }
         }
         if (!Input.GetKey(KeyCode.J))
         {
             GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+            nodash = false;
         }
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-               /* if (dashAllowed)
-                {
-                    GameObject smokeObject = Instantiate(smokePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
-                }*/
-                if (dash == true)
-                {
-                    return;
-                }
-                dash = true;
-                currentDashCooldown = dashCoolDown;
-                currentDashTime = dashTime;
-                dashAllowed = false;
-            }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            /* if (dashAllowed)
+             {
+                 GameObject smokeObject = Instantiate(smokePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+             }*/
             if (dash == true)
             {
-                if (currentDashTime > 0)
-                {
-                    Dash();
-                    currentDashTime -= Time.deltaTime;
-                }
-                currentDashCooldown -= Time.deltaTime;
+                return;
+            }
+            dash = true;
+            currentDashCooldown = dashCoolDown;
+            currentDashTime = dashTime;
+            dashAllowed = false;
+        }
+        if (dash == true)
+        {
+            if (currentDashTime > 0)
+            {
+                Dash();
                 currentDashTime -= Time.deltaTime;
             }
-            if (currentDashCooldown < 0)
-            {
-                dash = false;
-                dashAllowed = true;
-            }
-        
+            currentDashCooldown -= Time.deltaTime;
+            currentDashTime -= Time.deltaTime;
+        }
+        if (currentDashCooldown < 0)
+        {
+            dash = false;
+            dashAllowed = true;
+        }
+
         if (currentDashTime > 0)
         {
             dashActive = true;
@@ -120,7 +126,7 @@ public class MainCharController : MonoBehaviour
     public bool IsGrounded()
     {
         Collider2D groundCheck = Physics2D.OverlapCircle(feet.position, 0.5f, groundLayers);
-        if(groundCheck != null)
+        if (groundCheck != null)
         {
             return true;
         }
@@ -128,23 +134,19 @@ public class MainCharController : MonoBehaviour
     }
     void Dash()
     {
+        if (nodash)
+        {
+            return;
+        }
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
         Vector2 movement = new Vector2(dashForce, 0.0f);
-        if(transform.localScale.x > 0)
+        if (transform.localScale.x > 0)
         {
-            if(horizontal==0)
-            {
-                transform.Translate(movement);
-            }
-            transform.Translate(movement*1.5f);
+            transform.Translate(movement * 1.5f);
         }
-        if(transform.localScale.x < 0)
+        if (transform.localScale.x < 0)
         {
-            if(horizontal==0)
-            {
-                transform.Translate(-movement);
-            }
-            transform.Translate(-movement*1.5f);
+            transform.Translate(-movement * 1.5f);
         }
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         animator.SetTrigger("Dash");
