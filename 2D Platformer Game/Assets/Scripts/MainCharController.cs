@@ -34,7 +34,7 @@ public class MainCharController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump") && IsGrounded() && nodash==false)
+        if (Input.GetButtonDown("Jump") && IsGrounded() && nodash == false)
         {
             Jump();
         }
@@ -139,14 +139,14 @@ public class MainCharController : MonoBehaviour
             return;
         }
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
-        Vector2 movement = new Vector2(dashForce, 0.0f);
+        Vector2 dashmovement = new Vector2(dashForce, 0.0f);
         if (transform.localScale.x > 0)
         {
-            transform.Translate(movement * 1.5f);
+            transform.Translate(dashmovement * 1.5f);
         }
         if (transform.localScale.x < 0)
         {
-            transform.Translate(-movement * 1.5f);
+            transform.Translate(-dashmovement * 1.5f);
         }
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         animator.SetTrigger("Dash");
