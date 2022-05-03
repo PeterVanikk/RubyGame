@@ -302,7 +302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1488306846}
   - component: {fileID: 1488306845}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1002,6 +1002,14 @@ PrefabInstance:
     - target: {fileID: 4091016672318937940, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
       propertyPath: dashForce
       value: 0.021
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091016672318937940, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
+      propertyPath: jumpForce
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091016672318937940, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
+      propertyPath: groundLayers.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4601975095354592075, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
       propertyPath: m_Sprite

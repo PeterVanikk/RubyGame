@@ -147,8 +147,8 @@ public class MainCharController : MonoBehaviour
         if (transform.localScale.x < 0)
         {
             transform.Translate(-dashmovement * 1.5f);
-        }
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
         animator.SetTrigger("Dash");
     }
 }

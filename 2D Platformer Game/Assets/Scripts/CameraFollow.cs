@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+    Rigidbody2D rigidbody2d;
     public Transform target;
     public Vector3 offset;
     [Range(1, 10)]
