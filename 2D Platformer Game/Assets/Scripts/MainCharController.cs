@@ -23,6 +23,7 @@ public class MainCharController : MonoBehaviour
     public bool dashActive = false;
     public bool dash = false;
     public bool nodash;
+    public float dashSpeed;
 
     Animator animator;
     void Start()
@@ -138,7 +139,11 @@ public class MainCharController : MonoBehaviour
         {
             return;
         }
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
+        Debug.Log("dash");
+        Vector2 movement = new Vector2(dashForce * horizontal, 0.0f);
+        rigidbody2d.velocity = movement;
+
+        /*GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
         Vector2 dashmovement = new Vector2(dashForce, 0.0f);
         if (transform.localScale.x > 0)
         {
@@ -148,7 +153,7 @@ public class MainCharController : MonoBehaviour
         {
             transform.Translate(-dashmovement * 1.5f);
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-        }
+        }*/
         animator.SetTrigger("Dash");
     }
 }
