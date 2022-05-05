@@ -1133,10 +1133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9bbadb8bdde984ca190241fae02afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody2d: {fileID: 0}
-  target: {fileID: 0}
-  offset: {x: 0, y: 0, z: -10}
-  smoothFactor: 5.5
 --- !u!50 &2071529471
 Rigidbody2D:
   serializedVersion: 4
@@ -1213,7 +1209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4091016672318937940, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
       propertyPath: dashForce
-      value: 0.019
+      value: 0.016
       objectReference: {fileID: 0}
     - target: {fileID: 4091016672318937940, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
       propertyPath: dashSpeed
