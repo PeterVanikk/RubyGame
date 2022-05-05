@@ -26,6 +26,7 @@ public class MainCharController : MonoBehaviour
     public float dashSpeed;
 
     Animator animator;
+    Vector2 lookDirection = new Vector2(1, 0);
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -35,13 +36,19 @@ public class MainCharController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector2 move = new Vector2(horizontal, vertical);
+        if (!Mathf.Approximately(move.x, 0.0f))
+        {
+            //look in direction of move vector
+            lookDirection.Set(move.x, 0.0f);
+            //set length as 1
+            lookDirection.Normalize();
+        }
         if (Input.GetButtonDown("Jump") && IsGrounded() && nodash == false)
         {
             Jump();
         }
         horizontal = Input.GetAxisRaw("Horizontal");
-
-        Vector2 move = new Vector2(horizontal, vertical);
 
         if (horizontal > 0)
         {
@@ -112,7 +119,15 @@ public class MainCharController : MonoBehaviour
         {
             dashActive = false;
         }
+        RaycastHit2D dashchk = Physics2D.Raycast(rigidbody2d.position, lookDirection, 0.7f, LayerMask.GetMask("Ground"));
+        if (dashchk.collider != null)
+        {
+            dash = true;
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
+
+        }
     }
+
     void FixedUpdate()
     {
         Vector2 movement = new Vector2(horizontal * speed, rigidbody2d.velocity.y);
@@ -135,16 +150,18 @@ public class MainCharController : MonoBehaviour
     }
     void Dash()
     {
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
+
         if (nodash)
         {
             return;
         }
-        /*Debug.Log("dash");
-        Vector2 movement = new Vector2(dashForce * horizontal, 0.0f);
-        rigidbody2d.velocity = movement; */
 
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
-        Vector2 dashmovement = new Vector2(dashForce, 0.0f);
+        Vector2 movement = new Vector2(dashForce, 0.0f);
+        //rigidbody2d.velocity = movement * lookDirection;
+        rigidbody2d.AddForce(movement * lookDirection);
+
+       /* Vector2 dashmovement = new Vector2(dashForce, 0.0f);
         if (transform.localScale.x > 0)
         {
             transform.Translate(dashmovement * 1.5f);
@@ -153,7 +170,7 @@ public class MainCharController : MonoBehaviour
         {
             transform.Translate(-dashmovement * 1.5f);
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-        }
+        }*/
         animator.SetTrigger("Dash");
     }
 }
