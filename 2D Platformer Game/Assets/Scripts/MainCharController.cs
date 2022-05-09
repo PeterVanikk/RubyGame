@@ -53,6 +53,8 @@ public class MainCharController : MonoBehaviour
             //lookDirection.Set(transform.localScale.x, 0.0f);
         //}
         animator.SetBool("lookingUp", false);
+        animator.SetBool("lookingDown", false);
+        animator.SetBool("isDashing", false);
         //look in direction of move vector
         lookDirection.Set(transform.localScale.x, 0.0f);
         //set length as 1
@@ -67,7 +69,11 @@ public class MainCharController : MonoBehaviour
             animator.SetBool("lookingUp", true);
             lookDirection.Set(0.0f, 1.0f);
         }
-        Debug.Log(lookDirection);
+        if(Input.GetKey(KeyCode.S))
+        {
+            animator.SetBool("lookingDown", true);
+            lookDirection.Set(0.0f, -1.0f);
+        }
         if (!Mathf.Approximately(move.x, 0.0f))
         {
             animator.SetBool("isRunning", true);
@@ -129,7 +135,7 @@ public class MainCharController : MonoBehaviour
         {
             dashActive = false;
         }
-        RaycastHit2D dashchk = Physics2D.Raycast(rigidbody2d.position, lookDirection, 0.7f, LayerMask.GetMask("Ground"));
+        RaycastHit2D dashchk = Physics2D.Raycast(rigidbody2d.position, lookDirection, 1.2f, LayerMask.GetMask("Ground"));
         if (dashchk.collider != null)
         {
             dash = true;
@@ -181,6 +187,6 @@ public class MainCharController : MonoBehaviour
              transform.Translate(-dashmovement * 1.5f);
          GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
          }*/
-        animator.SetTrigger("Dash");
+        animator.SetBool("isDashing", true);
     }
 }
