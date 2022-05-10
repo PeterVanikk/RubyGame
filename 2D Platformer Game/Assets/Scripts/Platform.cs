@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    Rigidbody2D rigidbody2D;
-    void onTriggerEnter2D(Collider2D other)
+    private PlatformEffector2D effector;
+    void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        MainCharController controller = other.GetComponent<MainCharController>();
-        if(controller != null)
+        effector = GetComponent<PlatformEffector2D>();
+    }
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.Space))
         {
-            if(controller.JumpStage()==true)
-            {
-                gameObject.GetComponent<BoxCollider>().enabled = false;
-            }
-                gameObject.GetComponent<BoxCollider>().enabled = true;
+            StartCoroutine(Drop());
         }
+    }
+    IEnumerator Drop()
+    {
+        effector.rotationalOffset = 180f;
+        yield return new WaitForSeconds(0.2f);
+        effector.rotationalOffset = 0f;
     }
 }

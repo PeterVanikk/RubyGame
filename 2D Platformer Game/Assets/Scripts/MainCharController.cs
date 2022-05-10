@@ -37,6 +37,7 @@ public class MainCharController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        JumpStage();
         horizontal = Input.GetAxisRaw("Horizontal");
 
         if (horizontal > 0)
@@ -50,7 +51,7 @@ public class MainCharController : MonoBehaviour
         Vector2 move = new Vector2(horizontal, vertical);
         //if (Mathf.Approximately(0.0f,0.0f))
         //{
-            //lookDirection.Set(transform.localScale.x, 0.0f);
+        //lookDirection.Set(transform.localScale.x, 0.0f);
         //}
         animator.SetBool("lookingUp", false);
         animator.SetBool("lookingDown", false);
@@ -60,16 +61,16 @@ public class MainCharController : MonoBehaviour
         //set length as 1
         lookDirection.Normalize();
 
-        if (Input.GetButtonDown("Jump") && IsGrounded() && nodash == false)
+        if (Input.GetButtonDown("Jump") && IsGrounded() && nodash == false && !Input.GetKey(KeyCode.S))
         {
             Jump();
         }
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && IsGrounded())
         {
             animator.SetBool("lookingUp", true);
             lookDirection.Set(0.0f, 1.0f);
         }
-        if(Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             animator.SetBool("lookingDown", true);
             lookDirection.Set(0.0f, -1.0f);
@@ -139,8 +140,6 @@ public class MainCharController : MonoBehaviour
         if (dashchk.collider != null)
         {
             dash = true;
-            //GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
-
         }
     }
 
@@ -166,10 +165,9 @@ public class MainCharController : MonoBehaviour
     }
     public bool JumpStage()
     {
-        if(rigidbody2d.velocity.y > 0)
+        if (rigidbody2d.velocity.y > 0)
         {
             return true;
-            Debug.Log("true");
         }
         return false;
     }
