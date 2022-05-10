@@ -164,6 +164,15 @@ public class MainCharController : MonoBehaviour
         }
         return false;
     }
+    public bool JumpStage()
+    {
+        if(rigidbody2d.velocity.y > 0)
+        {
+            return true;
+            Debug.Log("true");
+        }
+        return false;
+    }
     void Dash()
     {
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
