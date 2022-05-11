@@ -57,6 +57,7 @@ public class RubyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(lookDirection);
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
         //create vector 2 in charge of moving

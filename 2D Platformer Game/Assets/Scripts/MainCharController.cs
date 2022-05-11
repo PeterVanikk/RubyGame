@@ -25,6 +25,10 @@ public class MainCharController : MonoBehaviour
     public bool nodash;
     public float dashSpeed;
 
+    public GameObject projectilePrefab;
+    public float currentTimeProjectile;
+    public float maxTimeProjectile = 0.5f;
+
     Animator animator;
     Vector2 lookDirection = new Vector2(1, 0);
     void Start()
@@ -141,6 +145,15 @@ public class MainCharController : MonoBehaviour
         {
             dash = true;
         }
+        if(Input.GetKey(KeyCode.I))
+        {
+            if(currentTimeProjectile < 0)
+            {
+                currentTimeProjectile = maxTimeProjectile;
+                Launch();
+            }
+            currentTimeProjectile -= Time.deltaTime;
+        }
     }
 
     void FixedUpdate()
@@ -184,16 +197,14 @@ public class MainCharController : MonoBehaviour
         //rigidbody2d.velocity = movement * lookDirection;
         rigidbody2d.AddForce(movement * lookDirection);
 
-        /* Vector2 dashmovement = new Vector2(dashForce, 0.0f);
-         if (transform.localScale.x > 0)
-         {
-             transform.Translate(dashmovement * 1.5f);
-         }
-         if (transform.localScale.x < 0)
-         {
-             transform.Translate(-dashmovement * 1.5f);
-         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-         }*/
         animator.SetBool("isDashing", true);
+    }
+    void Launch()
+    {
+        GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.3f, Quaternion.identity);
+        Projectile projectile = projectileObject.GetComponent<Projectile>();
+        projectile.Launch(lookDirection, 400);
+
+        animator.SetTrigger("Shoot");
     }
 }
