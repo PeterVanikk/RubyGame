@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public LayerMask groundLayers;
+
     Rigidbody2D rigidbody2d;
     float projectileTimer = 2.0f;
     float currentProjectileTime;
@@ -26,5 +28,16 @@ public class Projectile : MonoBehaviour
     {
         currentProjectileTime = projectileTimer;
         rigidbody2d.AddForce(direction * force);
+    }
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.collider.tag == "enemy")
+        {
+            Debug.Log("hitenemy");
+        }
+        if(other.collider.tag != "platform")
+        {
+        Destroy(gameObject);
+        }
     }
 }
