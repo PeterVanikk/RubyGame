@@ -14,6 +14,7 @@ public class MainCharController : MonoBehaviour
     float horizontal;
     float vertical;
     public LayerMask groundLayers;
+    public LayerMask platformLayers;
     //dash
     public float dashTime = 0.3f;
     public float currentDashTime;
@@ -170,7 +171,8 @@ public class MainCharController : MonoBehaviour
     public bool IsGrounded()
     {
         Collider2D groundCheck = Physics2D.OverlapCircle(feet.position, 0.5f, groundLayers);
-        if (groundCheck != null)
+        Collider2D platformCheck = Physics2D.OverlapCircle(feet.position, 0.5f, platformLayers);
+        if (groundCheck != null || platformCheck != null)
         {
             return true;
         }

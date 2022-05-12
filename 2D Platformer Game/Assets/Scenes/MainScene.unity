@@ -685,8 +685,8 @@ Tilemap:
   - first: {x: 8, y: -2, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 11
-      m_TileSpriteIndex: 4
+      m_TileIndex: 10
+      m_TileSpriteIndex: 11
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -814,9 +814,9 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 47205a9f648b04a4f915a940814b5ffc, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: d9cd07ab2cc0d6940b73a4af04141a8d, type: 2}
-  - m_RefCount: 4
-    m_Data: {fileID: 11400000, guid: face785eb74c9cf4e8e3195912da01c3, type: 2}
   - m_RefCount: 5
+    m_Data: {fileID: 11400000, guid: face785eb74c9cf4e8e3195912da01c3, type: 2}
+  - m_RefCount: 4
     m_Data: {fileID: 11400000, guid: a7e2ec6a17ff15a489994c132e5138ba, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
@@ -827,7 +827,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 5
+  - m_RefCount: 4
     m_Data: {fileID: -8450295650506546065, guid: aff2e1025b3883346993693f07b2c3c5, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -841,7 +841,7 @@ Tilemap:
     m_Data: {fileID: -4175727180594264523, guid: aff2e1025b3883346993693f07b2c3c5, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 1178519001275900971, guid: aff2e1025b3883346993693f07b2c3c5, type: 3}
-  - m_RefCount: 4
+  - m_RefCount: 5
     m_Data: {fileID: 7969662855778099440, guid: aff2e1025b3883346993693f07b2c3c5, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 20
@@ -5631,6 +5631,10 @@ PrefabInstance:
     - target: {fileID: 4091016672318937940, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
       propertyPath: groundLayers.m_Bits
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091016672318937940, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
+      propertyPath: platformLayers.m_Bits
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 4601975095354592075, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
       propertyPath: m_Sprite
