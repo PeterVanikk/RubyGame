@@ -26,6 +26,7 @@ public class MainCharController : MonoBehaviour
     public bool nodash;
     public float dashSpeed;
 
+    public float currentTimeProj;
     public GameObject projectilePrefab;
     public float currentTimeProjectile;
     public float maxTimeProjectile = 0.5f;
@@ -146,14 +147,26 @@ public class MainCharController : MonoBehaviour
         {
             dash = true;
         }
-        if(Input.GetKey(KeyCode.I))
+        if (IsGrounded())
         {
-            if(currentTimeProjectile < 0)
+            if (Input.GetKey(KeyCode.I) && currentTimeProj < 0)
             {
-                currentTimeProjectile = maxTimeProjectile;
-                Launch();
+                if (currentTimeProjectile < 0)
+                {
+                    currentTimeProjectile = maxTimeProjectile;
+                    Launch();
+                }
+                currentTimeProjectile -= Time.deltaTime;
             }
-            currentTimeProjectile -= Time.deltaTime;
+            if (currentTimeProj <= 0)
+            {
+                if (Input.GetKeyDown(KeyCode.I))
+                {
+                    Launch();
+                    currentTimeProj = maxTimeProjectile;
+                }
+            }
+            currentTimeProj -= Time.deltaTime;
         }
     }
 
