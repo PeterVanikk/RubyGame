@@ -19,8 +19,8 @@ TagManager:
   - Player
   - platform
   - Enemy
-  - 
-  - 
+  - EnemyView
+  - EnemyBackView
   - 
   - 
   - 

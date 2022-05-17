@@ -31,6 +31,15 @@ public class MainCharController : MonoBehaviour
     public float currentTimeProjectile;
     public float maxTimeProjectile = 0.5f;
 
+    //health
+    public int health { get { return currentHealth; } }
+    int currentHealth;
+
+    public int maxHealth = 5;
+    public float timeInvincible = 2.0f;
+    public bool isInvincible;
+    public float invincibleTimer;
+
     Animator animator;
     Vector2 lookDirection = new Vector2(1, 0);
     void Start()
@@ -38,6 +47,7 @@ public class MainCharController : MonoBehaviour
         animator = GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         lookDirection.Set(1f, 0f);
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -96,6 +106,14 @@ public class MainCharController : MonoBehaviour
             {
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
                 animator.SetBool("isRunning", false);
+            }
+        }
+        if (isInvincible)
+        {
+            invincibleTimer -= Time.deltaTime;
+            if (invincibleTimer < 0)
+            {
+                isInvincible = false;
             }
         }
         if (!Input.GetKey(KeyCode.J))
@@ -221,5 +239,17 @@ public class MainCharController : MonoBehaviour
         projectile.Launch(lookDirection, 400);
 
         animator.SetTrigger("Shoot");
+    }
+    public void ChangeHealth(int amount)
+    {
+        if (amount < 0)
+        {
+            if (isInvincible)
+                return;
+            isInvincible = true;
+            invincibleTimer = timeInvincible;
+        }
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        Debug.Log(currentHealth);
     }
 }
