@@ -37,8 +37,8 @@ public class MainCharController : MonoBehaviour
 
     public int maxHealth = 5;
     public float timeInvincible = 2.0f;
-    public bool isInvincible;
-    public float invincibleTimer;
+    bool isInvincible;
+    float invincibleTimer;
 
     Animator animator;
     Vector2 lookDirection = new Vector2(1, 0);
@@ -112,9 +112,7 @@ public class MainCharController : MonoBehaviour
         {
             invincibleTimer -= Time.deltaTime;
             if (invincibleTimer < 0)
-            {
                 isInvincible = false;
-            }
         }
         if (!Input.GetKey(KeyCode.J))
         {
@@ -245,7 +243,9 @@ public class MainCharController : MonoBehaviour
         if (amount < 0)
         {
             if (isInvincible)
+            {
                 return;
+            }
             isInvincible = true;
             invincibleTimer = timeInvincible;
         }

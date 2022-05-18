@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         projectileTimer -= Time.deltaTime;
-        if(projectileTimer < 0)
+        if (projectileTimer < 0)
         {
             Destroy(gameObject);
         }
@@ -31,13 +31,15 @@ public class Projectile : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.collider.tag == "enemy")
+        if (other.collider.tag == "enemy")
         {
-            Debug.Log("hitenemy");
+            Debug.Log("arrowhitskelly");
+            SkeletonAI skeleton = other.collider.GetComponent<SkeletonAI>();
+            skeleton.ChangeHealth(-1);
         }
-        if(other.collider.tag != "platform")
+        if (other.collider.tag != "platform")
         {
-        Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

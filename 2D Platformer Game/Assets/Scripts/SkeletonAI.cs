@@ -5,9 +5,11 @@ using UnityEngine;
 public class SkeletonAI : MonoBehaviour
 {
     Rigidbody2D rigidbody2d;
+    Animator animator;
 
     public float speed;
     public float distance;
+    public bool alive;
 
     public bool noplayer;
     public Transform groundDetection;
@@ -15,11 +17,17 @@ public class SkeletonAI : MonoBehaviour
     public Transform backeyes;
 
     Vector2 lookDirection = new Vector2(1, 0);
+
+    //health
+    public int health { get { return currentHealth; } }
+    int currentHealth;
+    public int maxHealth = 5;
     void Start()
     {
         lookDirection.Set(1f, 0f);
         rigidbody2d = GetComponent<Rigidbody2D>();
         GameObject player = GameObject.Find("MainCharacter");
+        currentHealth = maxHealth;
     }
     void Update()
     {
@@ -58,14 +66,38 @@ public class SkeletonAI : MonoBehaviour
         {
             noplayer = true;
         }
+        if (noplayer == false)
+        {
+            Shoot();
+        }
+        if(currentHealth <= 0)
+        {
+            StartCoroutine(Kill());
+        }
     }
-    void OnTriggerStay2D(Collider2D other)
+    void OnCollisionStay2D(Collision2D other)
     {
-        MainCharController controller = other.GetComponent<MainCharController>();
+        MainCharController controller = other.gameObject.GetComponent<MainCharController>();
         if (controller != null)
         {
-            lookDirection.Set(1f, 0f);
             controller.ChangeHealth(-1);
         }
+    }
+    public void Shoot()
+    {
+        Debug.Log("shoot!");
+    }
+    public void ChangeHealth(int amount)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        Debug.Log(currentHealth);
+    }
+    IEnumerator Kill()
+    {
+        alive = false;
+        //animator.SetTrigger("Dead");
+        yield return new WaitForSeconds(0.5f);
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.GetComponent<Renderer>().enabled = false;
     }
 }
