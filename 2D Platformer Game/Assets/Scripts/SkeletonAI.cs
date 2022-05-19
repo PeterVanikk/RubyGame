@@ -15,6 +15,12 @@ public class SkeletonAI : MonoBehaviour
     public Transform groundDetection;
     public Transform eyes;
     public Transform backeyes;
+    public GameObject bulletPrefab;
+    public Transform shootPoint;
+
+    //shoot
+    public float currentShootCooldown;
+    public float maxShootCooldown = 2f;
 
     Vector2 lookDirection = new Vector2(1, 0);
 
@@ -68,9 +74,14 @@ public class SkeletonAI : MonoBehaviour
         }
         if (noplayer == false)
         {
-            Shoot();
+            if(currentShootCooldown < 0)
+            {
+                currentShootCooldown = maxShootCooldown;
+                Launch();
+            }
+            currentShootCooldown -= Time.deltaTime;
         }
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             StartCoroutine(Kill());
         }
@@ -83,9 +94,12 @@ public class SkeletonAI : MonoBehaviour
             controller.ChangeHealth(-1);
         }
     }
-    public void Shoot()
+    void Launch()
     {
-        Debug.Log("shoot!");
+        GameObject projectileObject = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
+        SkellyArrowScript projectile = projectileObject.GetComponent<SkellyArrowScript>();
+        projectile.Shoot(lookDirection, 400);
+
     }
     public void ChangeHealth(int amount)
     {
