@@ -11,12 +11,4 @@ public class SkellyArrowScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    public void ShootLeft()
-    {
-        transform.Translate(Vector2.left * speed * Time.deltaTime);
-    }
-    public void ShootRight()
-    {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
-    }
 }

@@ -7,21 +7,24 @@ public class SkeletonAI : MonoBehaviour
     Rigidbody2D rigidbody2d;
     Animator animator;
 
-    public float speed;
+    public float speed, shootSpeed;
     public float distance;
     public bool alive;
+    public float range;
+    private float distToPlayer;
+    public float timeBTWShots = 2.0f;
+    private bool canShoot;
 
     public bool noplayer;
     public Transform groundDetection;
-    public Transform eyes;
-    public Transform backeyes;
     public GameObject bulletPrefab;
     public Transform shootPoint;
+    public Transform player;
 
     //shoot
     public float currentShootCooldown;
     public float maxShootCooldown = 2f;
-
+    public float timeToLaunch = 0f;
     Vector2 lookDirection = new Vector2(1, 0);
 
     //health
@@ -30,6 +33,7 @@ public class SkeletonAI : MonoBehaviour
     public int maxHealth = 5;
     void Start()
     {
+        canShoot = true;
         lookDirection.Set(1f, 0f);
         rigidbody2d = GetComponent<Rigidbody2D>();
         GameObject player = GameObject.Find("MainCharacter");
@@ -37,6 +41,27 @@ public class SkeletonAI : MonoBehaviour
     }
     void Update()
     {
+        distToPlayer = Vector2.Distance(transform.position, player.position);
+        if (distToPlayer <= range && player.position.y >= transform.position.y - 1.0f)
+        {
+            noplayer = false;
+            if (player.position.x > transform.position.x && transform.localScale.x < 0)
+            {
+                transform.localScale = new Vector2(1f, 1f);
+            }
+            if (player.position.x < transform.position.x && transform.localScale.x > 0)
+            {
+                transform.localScale = new Vector2(-1f, 1f);
+            }
+            if (canShoot)
+            {
+                StartCoroutine(Shoot());
+            }
+        }
+        else
+        {
+            noplayer = true;
+        }
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         lookDirection.Set(transform.localScale.x, 0.0f);
         if (noplayer == true)
@@ -57,30 +82,6 @@ public class SkeletonAI : MonoBehaviour
             }
         }
         Debug.Log(lookDirection);
-        RaycastHit2D playerchk = Physics2D.Raycast(eyes.position, lookDirection, 6.5f, LayerMask.GetMask("Player"));
-        RaycastHit2D playerbehindchk = Physics2D.Raycast(backeyes.position, -lookDirection, 3.5f, LayerMask.GetMask("Player"));
-        if (playerchk.collider != null)
-        {
-            noplayer = false;
-        }
-        if (playerbehindchk.collider != null)
-        {
-            noplayer = false;
-            transform.localScale = new Vector2(-transform.localScale.x, 1f);
-        }
-        if (playerbehindchk.collider == null && playerchk.collider == null)
-        {
-            noplayer = true;
-        }
-        if (noplayer == false)
-        {
-            if(currentShootCooldown < 0)
-            {
-                currentShootCooldown = maxShootCooldown;
-                Launch();
-            }
-            currentShootCooldown -= Time.deltaTime;
-        }
         if (currentHealth <= 0)
         {
             StartCoroutine(Kill());
@@ -94,19 +95,7 @@ public class SkeletonAI : MonoBehaviour
             controller.ChangeHealth(-1);
         }
     }
-    void Launch()
-    {
-        GameObject projectileObject = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
-        SkellyArrowScript projectile = projectileObject.GetComponent<SkellyArrowScript>();
-        if(transform.localScale.x < 0)
-        {
-            projectile.ShootLeft();
-        }
-        if(transform.localScale.x > 0)
-        {
-            projectile.ShootRight();
-        } 
-    }
+
     public void ChangeHealth(int amount)
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
@@ -119,5 +108,13 @@ public class SkeletonAI : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.GetComponent<Renderer>().enabled = false;
+    }
+    IEnumerator Shoot()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(timeBTWShots);
+        GameObject projectileObject = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
+        projectileObject.GetComponent<Rigidbody2D>().velocity = new Vector2(shootSpeed * transform.localScale.x * Time.fixedDeltaTime, 0f);
+        canShoot = true;
     }
 }

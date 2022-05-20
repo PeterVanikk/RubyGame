@@ -207,7 +207,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 6
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 5
@@ -229,16 +229,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  shootSpeed: 1000
   distance: 2
   alive: 0
+  range: 15
+  timeBTWShots: 1.2
   noplayer: 1
   groundDetection: {fileID: 8822883075935267895}
-  eyes: {fileID: 8822883074976986198}
-  backeyes: {fileID: 8822883074160986006}
   bulletPrefab: {fileID: 3336712504284566725, guid: 79ed3a25fe1f47c4cba9c15799c873b4, type: 3}
   shootPoint: {fileID: 2120694279}
+  player: {fileID: 0}
   currentShootCooldown: 0
   maxShootCooldown: 5
+  timeToLaunch: 0
   maxHealth: 5
 --- !u!1 &8822883074976986199
 GameObject:
