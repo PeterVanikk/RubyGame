@@ -98,8 +98,14 @@ public class SkeletonAI : MonoBehaviour
     {
         GameObject projectileObject = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
         SkellyArrowScript projectile = projectileObject.GetComponent<SkellyArrowScript>();
-        projectile.Shoot(lookDirection, 400);
-
+        if(transform.localScale.x < 0)
+        {
+            projectile.ShootLeft();
+        }
+        if(transform.localScale.x > 0)
+        {
+            projectile.ShootRight();
+        } 
     }
     public void ChangeHealth(int amount)
     {
