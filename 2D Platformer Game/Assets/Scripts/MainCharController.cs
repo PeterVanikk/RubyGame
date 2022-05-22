@@ -30,6 +30,11 @@ public class MainCharController : MonoBehaviour
     public GameObject projectilePrefab;
     public float currentTimeProjectile;
     public float maxTimeProjectile = 0.5f;
+    public bool canShoot;
+    public Transform shootPoint;
+    public float projectileSpeed;
+    public float timeBTWShots;
+    public bool firstShot;
 
     //health
     public int health { get { return currentHealth; } }
@@ -48,6 +53,7 @@ public class MainCharController : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
         lookDirection.Set(1f, 0f);
         currentHealth = maxHealth;
+        canShoot = true;
     }
 
     // Update is called once per frame
@@ -163,26 +169,9 @@ public class MainCharController : MonoBehaviour
         {
             dash = true;
         }
-        if (IsGrounded())
+        if (IsGrounded() && Input.GetKey(KeyCode.I) && canShoot)
         {
-            if (Input.GetKey(KeyCode.I) && currentTimeProj < 0)
-            {
-                if (currentTimeProjectile < 0)
-                {
-                    currentTimeProjectile = maxTimeProjectile;
-                    Launch();
-                }
-                currentTimeProjectile -= Time.deltaTime;
-            }
-            if (currentTimeProj <= 0)
-            {
-                if (Input.GetKeyDown(KeyCode.I))
-                {
-                    Launch();
-                    currentTimeProj = maxTimeProjectile;
-                }
-            }
-            currentTimeProj -= Time.deltaTime;
+           StartCoroutine(Launch());
         }
     }
 
@@ -230,13 +219,13 @@ public class MainCharController : MonoBehaviour
 
         animator.SetBool("isDashing", true);
     }
-    void Launch()
+    IEnumerator Launch()
     {
-        GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.3f, Quaternion.identity);
-        Projectile projectile = projectileObject.GetComponent<Projectile>();
-        projectile.Launch(lookDirection, 400);
-
-        animator.SetTrigger("Shoot");
+        canShoot = false;
+        yield return new WaitForSeconds(timeBTWShots);
+        GameObject projectileObject = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
+        projectileObject.GetComponent<Rigidbody2D>().velocity = (lookDirection * projectileSpeed);
+        canShoot = true;
     }
     public void ChangeHealth(int amount)
     {

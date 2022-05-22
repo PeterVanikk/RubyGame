@@ -24,16 +24,10 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void Launch(Vector2 direction, float force)
-    {
-        currentProjectileTime = projectileTimer;
-        rigidbody2d.AddForce(direction * force);
-    }
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.collider.tag == "enemy")
         {
-            Debug.Log("arrowhitskelly");
             SkeletonAI skeleton = other.collider.GetComponent<SkeletonAI>();
             skeleton.ChangeHealth(-1);
         }
