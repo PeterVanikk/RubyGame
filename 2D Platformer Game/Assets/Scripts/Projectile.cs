@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public LayerMask groundLayers;
-
+    Rigidbody2D rb;
     Rigidbody2D rigidbody2d;
+
+    public LayerMask groundLayers;
     float projectileTimer = 2.0f;
     float currentProjectileTime;
     // Start is called before the first frame update
