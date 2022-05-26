@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 8822883074441825267}
   - component: {fileID: 8822883074441825266}
   - component: {fileID: 8822883074441825269}
+  - component: {fileID: 690974254}
   m_Layer: 10
   m_Name: skeleton_archer_idle_0
   m_TagString: enemy
@@ -182,7 +183,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.029773712, y: -0.00992465}
+  m_Offset: {x: -0.046360016, y: -0.47438395}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -193,7 +194,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0398064, y: 1.5528662}
+  m_Size: {x: 0.7743988, y: 0.6239476}
   m_EdgeRadius: 0
 --- !u!50 &8822883074441825266
 Rigidbody2D:
@@ -229,11 +230,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  shootSpeed: 1000
+  shootSpeed: 300
   distance: 2
   alive: 0
   range: 15
-  timeBTWShots: 1.2
+  timeBTWShots: 2
   noplayer: 1
   groundDetection: {fileID: 8822883075935267895}
   bulletPrefab: {fileID: 3336712504284566725, guid: 79ed3a25fe1f47c4cba9c15799c873b4, type: 3}
@@ -243,6 +244,22 @@ MonoBehaviour:
   maxShootCooldown: 5
   timeToLaunch: 0
   maxHealth: 5
+--- !u!58 &690974254
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822883074441825279}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0000019073486, y: 0.31516868}
+  serializedVersion: 2
+  m_Radius: 0.4683094
 --- !u!1 &8822883074976986199
 GameObject:
   m_ObjectHideFlags: 0

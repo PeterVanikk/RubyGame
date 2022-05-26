@@ -3636,7 +3636,7 @@ Transform:
   - {fileID: 117872368}
   - {fileID: 1826163285}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1579657157
 GameObject:
@@ -5611,6 +5611,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8698057089801461919, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
+      propertyPath: m_TagString
+      value: player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
 --- !u!1001 &8822883075951560569
@@ -5622,7 +5626,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8822883074441825264, guid: 49360e045229d404f89223aee3b23355, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8822883074441825264, guid: 49360e045229d404f89223aee3b23355, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5668,14 +5672,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1005621804}
-    - target: {fileID: 8822883074441825269, guid: 49360e045229d404f89223aee3b23355, type: 3}
-      propertyPath: shootSpeed
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 8822883074441825269, guid: 49360e045229d404f89223aee3b23355, type: 3}
-      propertyPath: timeBTWShots
-      value: 3.2
-      objectReference: {fileID: 0}
     - target: {fileID: 8822883074441825279, guid: 49360e045229d404f89223aee3b23355, type: 3}
       propertyPath: m_Name
       value: skeleton_archer_idle_0

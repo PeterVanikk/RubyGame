@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkellyArrowScript : MonoBehaviour
+public class EnemyArrowScript : MonoBehaviour
 {
     Rigidbody2D rb;
     public LayerMask groundLayers;
@@ -26,10 +26,10 @@ public class SkellyArrowScript : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.collider.tag == "enemy")
+        if (other.collider.tag == "player")
         {
-            SkeletonAI skeleton = other.collider.GetComponent<SkeletonAI>();
-            skeleton.ChangeHealth(-1);
+            MainCharController player = other.collider.GetComponent<MainCharController>();
+            player.ChangeHealth(-1);
         }
         if (other.collider.tag != "platform")
         {

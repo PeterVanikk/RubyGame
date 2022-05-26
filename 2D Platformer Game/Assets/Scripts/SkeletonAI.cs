@@ -33,6 +33,7 @@ public class SkeletonAI : MonoBehaviour
     public int maxHealth = 5;
     void Start()
     {
+        animator = GetComponent<Animator>();
         canShoot = true;
         lookDirection.Set(1f, 0f);
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -41,6 +42,14 @@ public class SkeletonAI : MonoBehaviour
     }
     void Update()
     {
+        if (noplayer)
+        {
+            animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
+        }
         distToPlayer = Vector2.Distance(transform.position, player.position);
         if (distToPlayer <= range && player.position.y >= transform.position.y - 1.0f)
         {
@@ -113,8 +122,13 @@ public class SkeletonAI : MonoBehaviour
     {
         canShoot = false;
         yield return new WaitForSeconds(timeBTWShots);
-        GameObject projectileObject = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
-        projectileObject.GetComponent<Rigidbody2D>().velocity = new Vector2(shootSpeed * transform.localScale.x * Time.fixedDeltaTime, 0f);
+        animator.SetTrigger("Attack");
+        yield return new WaitForSeconds(0.8f);
+        if (noplayer == false)
+        {
+            GameObject projectileObject = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
+            projectileObject.GetComponent<Rigidbody2D>().velocity = new Vector2(shootSpeed * transform.localScale.x * Time.fixedDeltaTime, 0f);
+        }
         canShoot = true;
     }
 }
