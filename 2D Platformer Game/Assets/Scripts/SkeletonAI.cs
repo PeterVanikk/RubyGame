@@ -90,10 +90,13 @@ public class SkeletonAI : MonoBehaviour
                 transform.localScale = new Vector2(1f, 1f);
             }
         }
-        Debug.Log(lookDirection);
         if (currentHealth <= 0)
         {
-            StartCoroutine(Kill());
+            if (alive == true)
+            {
+                StartCoroutine(Kill());
+                alive = false;
+            }
         }
     }
     void OnCollisionStay2D(Collision2D other)
@@ -112,11 +115,13 @@ public class SkeletonAI : MonoBehaviour
     }
     IEnumerator Kill()
     {
-        alive = false;
-        //animator.SetTrigger("Dead");
-        yield return new WaitForSeconds(0.5f);
+        animator.SetTrigger("Die");
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        gameObject.GetComponent<Renderer>().enabled = false;
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        enabled = false;
+        yield return new WaitForSeconds(6);
+        gameObject.SetActive(false);
     }
     IEnumerator Shoot()
     {
@@ -124,7 +129,7 @@ public class SkeletonAI : MonoBehaviour
         yield return new WaitForSeconds(timeBTWShots);
         animator.SetTrigger("Attack");
         yield return new WaitForSeconds(0.8f);
-        if (noplayer == false)
+        if (noplayer == false && alive == true)
         {
             GameObject projectileObject = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
             projectileObject.GetComponent<Rigidbody2D>().velocity = new Vector2(shootSpeed * transform.localScale.x * Time.fixedDeltaTime, 0f);

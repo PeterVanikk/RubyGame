@@ -232,7 +232,7 @@ MonoBehaviour:
   speed: 3
   shootSpeed: 300
   distance: 2
-  alive: 0
+  alive: 1
   range: 15
   timeBTWShots: 2
   noplayer: 1
