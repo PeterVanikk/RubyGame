@@ -21,10 +21,6 @@ public class SkeletonAI : MonoBehaviour
     public Transform shootPoint;
     public Transform player;
 
-    //shoot
-    public float currentShootCooldown;
-    public float maxShootCooldown = 2f;
-    public float timeToLaunch = 0f;
     Vector2 lookDirection = new Vector2(1, 0);
 
     //health
@@ -133,6 +129,12 @@ public class SkeletonAI : MonoBehaviour
         {
             GameObject projectileObject = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
             projectileObject.GetComponent<Rigidbody2D>().velocity = new Vector2(shootSpeed * transform.localScale.x * Time.fixedDeltaTime, 0f);
+        }
+        yield return new WaitForSeconds(0.02f);
+        EnemyArrowScript arrow = bulletPrefab.GetComponent<EnemyArrowScript>();
+        if (arrow != null)
+        {
+            arrow.setDirection(transform.localScale.x);
         }
         canShoot = true;
     }

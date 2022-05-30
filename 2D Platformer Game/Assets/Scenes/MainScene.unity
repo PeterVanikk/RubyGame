@@ -5668,18 +5668,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8822883074441825266, guid: 49360e045229d404f89223aee3b23355, type: 3}
-      propertyPath: m_Mass
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 8822883074441825269, guid: 49360e045229d404f89223aee3b23355, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1005621804}
-    - target: {fileID: 8822883074441825269, guid: 49360e045229d404f89223aee3b23355, type: 3}
-      propertyPath: shootSpeed
-      value: 500
-      objectReference: {fileID: 0}
     - target: {fileID: 8822883074441825279, guid: 49360e045229d404f89223aee3b23355, type: 3}
       propertyPath: m_Name
       value: skeleton_archer_idle_0

@@ -36,4 +36,9 @@ public class EnemyArrowScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void setDirection(float direction)
+    {
+        transform.localScale = new Vector2(direction, 1f);
+        Debug.Log("set direction of arrow to localscalex of skeleton");
+    }
 }
