@@ -171,7 +171,7 @@ public class MainCharController : MonoBehaviour
         }
         if (IsGrounded() && Input.GetKey(KeyCode.I) && canShoot)
         {
-           StartCoroutine(Launch());
+            StartCoroutine(Launch());
         }
     }
 
