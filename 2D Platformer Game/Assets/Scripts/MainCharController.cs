@@ -32,9 +32,10 @@ public class MainCharController : MonoBehaviour
     public float maxTimeProjectile = 0.5f;
     public bool canShoot;
     public Transform shootPoint;
+    public Transform shootPointDown;
+    public Transform shootPointUp;
     public float projectileSpeed;
     public float timeBTWShots;
-    public bool firstShot;
 
     //health
     public int health { get { return currentHealth; } }
@@ -127,7 +128,7 @@ public class MainCharController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            /* if (dashAllowed)
+            /*if (dashAllowed)
              {
                  GameObject smokeObject = Instantiate(smokePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
              }*/
@@ -222,9 +223,27 @@ public class MainCharController : MonoBehaviour
     IEnumerator Launch()
     {
         canShoot = false;
+        if (lookDirection.x > 0)
+        {
+            GameObject projectileObject = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
+            projectileObject.GetComponent<Rigidbody2D>().velocity = (lookDirection * projectileSpeed);
+        }
+        if (lookDirection.x < 0)
+        {
+            GameObject projectileObject = Instantiate(projectilePrefab, shootPoint.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+            projectileObject.GetComponent<Rigidbody2D>().velocity = (lookDirection * projectileSpeed);
+        }
+        if (lookDirection.y > 0)
+        {
+            GameObject projectileObject = Instantiate(projectilePrefab, shootPointUp.position, Quaternion.Euler(new Vector3(0, 0, 90)));
+            projectileObject.GetComponent<Rigidbody2D>().velocity = (lookDirection * projectileSpeed);
+        }
+        if (lookDirection.y < 0)
+        {
+            GameObject projectileObject = Instantiate(projectilePrefab, shootPointDown.position, Quaternion.Euler(new Vector3(0, 0, 270)));
+            projectileObject.GetComponent<Rigidbody2D>().velocity = (lookDirection * projectileSpeed);
+        }
         yield return new WaitForSeconds(timeBTWShots);
-        GameObject projectileObject = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
-        projectileObject.GetComponent<Rigidbody2D>().velocity = (lookDirection * projectileSpeed);
         canShoot = true;
     }
     public void ChangeHealth(int amount)

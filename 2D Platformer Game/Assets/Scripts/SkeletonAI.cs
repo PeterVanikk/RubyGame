@@ -127,15 +127,22 @@ public class SkeletonAI : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         if (noplayer == false && alive == true)
         {
-            GameObject projectileObject = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
-            projectileObject.GetComponent<Rigidbody2D>().velocity = new Vector2(shootSpeed * transform.localScale.x * Time.fixedDeltaTime, 0f);
+            if (transform.localScale.x < 0)
+            {
+                GameObject projectileObject = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
+                projectileObject.GetComponent<Rigidbody2D>().velocity = new Vector2(shootSpeed * transform.localScale.x * Time.fixedDeltaTime, 0f);
+            }
+            if (transform.localScale.x > 0)
+            {
+                GameObject projectileObject = Instantiate(bulletPrefab, shootPoint.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+                projectileObject.GetComponent<Rigidbody2D>().velocity = new Vector2(shootSpeed * transform.localScale.x * Time.fixedDeltaTime, 0f);
+            }
         }
-        yield return new WaitForSeconds(0.02f);
-        EnemyArrowScript arrow = bulletPrefab.GetComponent<EnemyArrowScript>();
+        /*EnemyArrowScript arrow = bulletPrefab.GetComponent<EnemyArrowScript>();
         if (arrow != null)
         {
             arrow.setDirection(transform.localScale.x);
-        }
+        }*/
         canShoot = true;
     }
 }
