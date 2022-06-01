@@ -139,7 +139,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: e4ea0284e7f200c43bb7e934e30b97c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -233,16 +233,13 @@ MonoBehaviour:
   shootSpeed: 500
   distance: 2
   alive: 1
-  range: 15
+  range: 7
   timeBTWShots: 2
   noplayer: 1
   groundDetection: {fileID: 8822883075935267895}
   bulletPrefab: {fileID: 3336712504284566725, guid: 79ed3a25fe1f47c4cba9c15799c873b4, type: 3}
   shootPoint: {fileID: 2120694279}
   player: {fileID: 0}
-  currentShootCooldown: 0
-  maxShootCooldown: 5
-  timeToLaunch: 0
   maxHealth: 5
 --- !u!58 &690974254
 CircleCollider2D:
