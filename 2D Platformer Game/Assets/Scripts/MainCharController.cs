@@ -260,4 +260,9 @@ public class MainCharController : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         Debug.Log(currentHealth);
     }
+    public void GoombaLaunch()
+    {
+        Debug.Log("launch");
+        rigidbody2d.AddForce(500f * Vector2.up);
+    }
 }
