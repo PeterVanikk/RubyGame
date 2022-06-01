@@ -46,16 +46,16 @@ public class SpiderBehaviour : MonoBehaviour
             //noplayer = false;
             if (player.position.x > transform.position.x && transform.localScale.x < 0)
             {
-                transform.localScale = new Vector2(1f, 1f);
+                StartCoroutine(flipRight());
             }
             if (player.position.x < transform.position.x && transform.localScale.x > 0)
             {
-                transform.localScale = new Vector2(-1f, 1f);
+                StartCoroutine(flipLeft());
             }
         }
         else
         {
-            noplayer = true;
+            StartCoroutine(noPlayerTrue());
         }
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         lookDirection.Set(transform.localScale.x, 0.0f);
@@ -130,5 +130,20 @@ public class SpiderBehaviour : MonoBehaviour
         enabled = false;
         yield return new WaitForSeconds(6);
         gameObject.SetActive(false);
+    }
+    IEnumerator flipLeft()
+    {
+        yield return new WaitForSeconds(0.2f);
+        transform.localScale = new Vector2(-1f, 1f);
+    }
+    IEnumerator flipRight()
+    {
+        yield return new WaitForSeconds(0.2f);
+        transform.localScale = new Vector2(1f, 1f);
+    }
+    IEnumerator noPlayerTrue()
+    {
+        yield return new WaitForSeconds(1);
+        noplayer = true;
     }
 }

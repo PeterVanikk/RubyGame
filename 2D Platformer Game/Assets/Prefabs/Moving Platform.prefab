@@ -99,7 +99,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.08429414}
+  m_Offset: {x: 0, y: 0.24455768}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -110,7 +110,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.62, y: 0.55141175}
+  m_Size: {x: 2.62, y: 0.23088467}
   m_EdgeRadius: 0
 --- !u!50 &4035399325543623266
 Rigidbody2D:
@@ -124,7 +124,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 20
+  m_Mass: 5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -146,10 +146,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingRight: 1
-  speed: 1
-  timeUntilFlip: 3
-  currentTime: 0
-  child: {fileID: 0}
+  speedx: 1.7
+  speedy: 0.3
+  timeUntilFlipx: 2
+  timeUntilFlipy: 1
+  currentTimex: 0
+  currentTimey: 0
+  movingUp: 1
+  oscillateY: 1
+  player: {fileID: 0}
 --- !u!251 &654256335
 PlatformEffector2D:
   m_ObjectHideFlags: 0

@@ -36,6 +36,7 @@ public class MainCharController : MonoBehaviour
     public Transform shootPointUp;
     public float projectileSpeed;
     public float timeBTWShots;
+    public float goombaLaunchForce;
 
     //health
     public int health { get { return currentHealth; } }
@@ -60,7 +61,6 @@ public class MainCharController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        JumpStage();
         horizontal = Input.GetAxisRaw("Horizontal");
 
         if (horizontal > 0)
@@ -197,14 +197,6 @@ public class MainCharController : MonoBehaviour
         }
         return false;
     }
-    public bool JumpStage()
-    {
-        if (rigidbody2d.velocity.y > 0)
-        {
-            return true;
-        }
-        return false;
-    }
     void Dash()
     {
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
@@ -262,7 +254,14 @@ public class MainCharController : MonoBehaviour
     }
     public void GoombaLaunch()
     {
-        Debug.Log("launch");
-        rigidbody2d.AddForce(500f * Vector2.up);
+        rigidbody2d.AddForce(goombaLaunchForce * Vector2.up);
+    }
+    public bool isFalling()
+    {
+        if(rigidbody2d.velocity.y < 0)
+        {
+            return true;
+        }
+        return false;
     }
 }
