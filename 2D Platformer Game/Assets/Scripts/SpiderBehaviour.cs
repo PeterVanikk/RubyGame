@@ -5,6 +5,8 @@ public class SpiderBehaviour : MonoBehaviour
 {
     Rigidbody2D rigidbody2d;
     Animator animator;
+    public LayerMask groundLayers;
+    public LayerMask platformLayers;
 
     public float speed;
     public float distance;
@@ -12,10 +14,14 @@ public class SpiderBehaviour : MonoBehaviour
     public float range;
     private float distToPlayer;
     public float jumpForce;
+    public float jumpForcex;
 
     public bool noplayer;
     public Transform groundDetection;
+    public Transform wallDetection;
     public Transform player;
+    public Transform feet;
+    public bool flipAllowed = true;
 
     Vector2 lookDirection = new Vector2(1, 0);
 
@@ -42,16 +48,19 @@ public class SpiderBehaviour : MonoBehaviour
             animator.SetBool("isRunning", false);
         }
         distToPlayer = Vector2.Distance(transform.position, player.position);
-        if (distToPlayer <= range && player.position.y >= transform.position.y - 1.0f)
+        if (distToPlayer <= range && player.position.y + 2.0f > transform.position.y)
         {
-            //noplayer = false;
-            if (player.position.x > transform.position.x && transform.localScale.x < 0)
+            if (player.position.y - 2.0f < transform.position.y)
             {
-                StartCoroutine(flipRight());
-            }
-            if (player.position.x < transform.position.x && transform.localScale.x > 0)
-            {
-                StartCoroutine(flipLeft());
+                //noplayer = false;
+                if (player.position.x > transform.position.x && transform.localScale.x < 0)
+                {
+                    StartCoroutine(flipRight());
+                }
+                if (player.position.x < transform.position.x && transform.localScale.x > 0)
+                {
+                    StartCoroutine(flipLeft());
+                }
             }
         }
         else
@@ -68,11 +77,11 @@ public class SpiderBehaviour : MonoBehaviour
         RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
         if (groundInfo.collider == false)
         {
-            if (distToPlayer <= range)
+            if (distToPlayer <= range && player.position.y <= transform.position.y - 1.0f && IsGrounded())
             {
                 Jump();
             }
-            else
+            else if (flipAllowed)
             {
                 if (transform.localScale.x == 1f)
                 {
@@ -92,6 +101,28 @@ public class SpiderBehaviour : MonoBehaviour
                 alive = false;
             }
         }
+        RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, lookDirection, distance);
+        if (wallInfo.collider == true)
+        {
+            if (transform.localScale.x == 1f)
+            {
+                transform.localScale = new Vector2(-1f, 1f);
+            }
+            else
+            {
+                transform.localScale = new Vector2(1f, 1f);
+            }
+        }
+    }
+    public bool IsGrounded()
+    {
+        Collider2D groundCheck = Physics2D.OverlapCircle(feet.position, 0.5f, groundLayers);
+        Collider2D platformCheck = Physics2D.OverlapCircle(feet.position, 0.5f, platformLayers);
+        if (groundCheck != null || platformCheck != null)
+        {
+            return true;
+        }
+        return false;
     }
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -156,8 +187,8 @@ public class SpiderBehaviour : MonoBehaviour
     }
     void Jump()
     {
-        Vector2 movement = new Vector2(rigidbody2d.velocity.x, jumpForce);
+        Vector2 movement = new Vector2(transform.localScale.x * jumpForcex, jumpForce);
         rigidbody2d.velocity = movement;
-        Debug.Log("jump");
+        flipAllowed = false;
     }
 }
