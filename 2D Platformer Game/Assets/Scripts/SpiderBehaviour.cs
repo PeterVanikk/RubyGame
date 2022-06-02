@@ -11,6 +11,7 @@ public class SpiderBehaviour : MonoBehaviour
     public bool alive;
     public float range;
     private float distToPlayer;
+    public float jumpForce;
 
     public bool noplayer;
     public Transform groundDetection;
@@ -67,13 +68,20 @@ public class SpiderBehaviour : MonoBehaviour
         RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
         if (groundInfo.collider == false)
         {
-            if (transform.localScale.x == 1f)
+            if (distToPlayer <= range)
             {
-                transform.localScale = new Vector2(-1f, 1f);
+                Jump();
             }
             else
             {
-                transform.localScale = new Vector2(1f, 1f);
+                if (transform.localScale.x == 1f)
+                {
+                    transform.localScale = new Vector2(-1f, 1f);
+                }
+                else
+                {
+                    transform.localScale = new Vector2(1f, 1f);
+                }
             }
         }
         if (currentHealth <= 0)
@@ -145,5 +153,11 @@ public class SpiderBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         noplayer = true;
+    }
+    void Jump()
+    {
+        Vector2 movement = new Vector2(rigidbody2d.velocity.x, jumpForce);
+        rigidbody2d.velocity = movement;
+        Debug.Log("jump");
     }
 }
