@@ -168,7 +168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1812305792306515283, guid: 351c3841a1ae30d4d994c2cb1bb9865b, type: 3}
       propertyPath: jumpForcex
-      value: 3.2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1812305792306515283, guid: 351c3841a1ae30d4d994c2cb1bb9865b, type: 3}
       propertyPath: wallDetection
