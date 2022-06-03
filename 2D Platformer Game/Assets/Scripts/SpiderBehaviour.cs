@@ -7,6 +7,7 @@ public class SpiderBehaviour : MonoBehaviour
     Animator animator;
     public LayerMask groundLayers;
     public LayerMask platformLayers;
+    public LayerMask playerlayer;
 
     public float speed;
     public float distance;
@@ -15,6 +16,7 @@ public class SpiderBehaviour : MonoBehaviour
     private float distToPlayer;
     public float jumpForce;
     public float jumpForcex;
+    public bool notHitting = true;
 
     public bool noplayer;
     public Transform groundDetection;
@@ -39,11 +41,11 @@ public class SpiderBehaviour : MonoBehaviour
     }
     void Update()
     {
-        if (noplayer)
+        if (noplayer && notHitting)
         {
             animator.SetBool("isRunning", true);
         }
-        else
+        if(!notHitting)
         {
             animator.SetBool("isRunning", false);
         }
@@ -69,7 +71,7 @@ public class SpiderBehaviour : MonoBehaviour
         }
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         lookDirection.Set(transform.localScale.x, 0.0f);
-        if (noplayer == true)
+        if (noplayer && notHitting)
         {
             transform.Translate(lookDirection * speed * Time.deltaTime);
         }
@@ -102,7 +104,7 @@ public class SpiderBehaviour : MonoBehaviour
             }
         }
         RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, lookDirection, distance);
-        if (wallInfo.collider == true)
+        if (wallInfo.collider != null && wallInfo.collider.gameObject.layer == 10)
         {
             if (transform.localScale.x == 1f)
             {
@@ -143,11 +145,20 @@ public class SpiderBehaviour : MonoBehaviour
             if (controller.GetComponent<MainCharController>().IsGrounded())
             {
                 controller.ChangeHealth(-1);
+                notHitting = false;
             }
         }
     }
+    void OnCollisionExit2D(Collision2D other)
+    {
+        MainCharController controller = other.gameObject.GetComponent<MainCharController>();
+        if (controller != null)
+        {
+            notHitting = true;
+        }
+    }
 
-    public void ChangeHealth(int amount)
+            public void ChangeHealth(int amount)
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         Debug.Log(currentHealth);

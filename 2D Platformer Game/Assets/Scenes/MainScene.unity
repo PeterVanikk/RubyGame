@@ -168,7 +168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1812305792306515283, guid: 351c3841a1ae30d4d994c2cb1bb9865b, type: 3}
       propertyPath: jumpForcex
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1812305792306515283, guid: 351c3841a1ae30d4d994c2cb1bb9865b, type: 3}
       propertyPath: wallDetection
@@ -185,6 +185,10 @@ PrefabInstance:
     - target: {fileID: 3240916883433176784, guid: 351c3841a1ae30d4d994c2cb1bb9865b, type: 3}
       propertyPath: m_Size.x
       value: 0.9552822
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240916883433176787, guid: 351c3841a1ae30d4d994c2cb1bb9865b, type: 3}
+      propertyPath: m_Mass
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3240916883433176787, guid: 351c3841a1ae30d4d994c2cb1bb9865b, type: 3}
       propertyPath: m_Constraints
@@ -5763,6 +5767,10 @@ PrefabInstance:
     - target: {fileID: 1616817124572477019, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
       propertyPath: m_GravityScale
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091016672318937940, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
+      propertyPath: goombaLaunchForce
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 5812821562811446630, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
       propertyPath: m_RootOrder
