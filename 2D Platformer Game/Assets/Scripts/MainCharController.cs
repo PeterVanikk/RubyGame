@@ -199,15 +199,12 @@ public class MainCharController : MonoBehaviour
     }
     void Dash()
     {
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-
         if (nodash)
         {
             return;
         }
-
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         Vector2 movement = new Vector2(dashForce, 0.0f);
-        //rigidbody2d.velocity = movement * lookDirection;
         rigidbody2d.AddForce(movement * lookDirection);
 
         animator.SetBool("isDashing", true);
@@ -258,7 +255,7 @@ public class MainCharController : MonoBehaviour
     }
     public bool isFalling()
     {
-        if(rigidbody2d.velocity.y < 0)
+        if (rigidbody2d.velocity.y < 0)
         {
             return true;
         }

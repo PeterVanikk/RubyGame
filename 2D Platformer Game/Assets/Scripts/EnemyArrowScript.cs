@@ -31,7 +31,7 @@ public class EnemyArrowScript : MonoBehaviour
             MainCharController player = other.collider.GetComponent<MainCharController>();
             player.ChangeHealth(-1);
         }
-        if (other.collider.tag != "platform")
+        if (other.collider.tag != "platform" && other.collider.tag != "movingplatform")
         {
             Destroy(gameObject);
         }

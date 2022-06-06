@@ -20,6 +20,7 @@ public class SkeletonAI : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform shootPoint;
     public Transform player;
+    public Transform wallDetection;
 
     Vector2 lookDirection = new Vector2(1, 0);
 
@@ -47,7 +48,7 @@ public class SkeletonAI : MonoBehaviour
             animator.SetBool("isRunning", false);
         }
         distToPlayer = Vector2.Distance(transform.position, player.position);
-        if (distToPlayer <= range && player.position.y >= transform.position.y - 1.0f)
+        if (distToPlayer <= range && player.position.y >= transform.position.y - 1.0f && player.position.y <= transform.position.y + 1.0f)
         {
             noplayer = false;
             if (player.position.x > transform.position.x && transform.localScale.x < 0)
@@ -92,6 +93,22 @@ public class SkeletonAI : MonoBehaviour
             {
                 StartCoroutine(Kill());
                 alive = false;
+            }
+        }
+        RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, lookDirection, 0.2f);
+        if (wallInfo.collider != null)
+        {
+            if (wallInfo.collider.gameObject.CompareTag("player"))
+            {
+                return;
+            }
+            if (transform.localScale.x == 1f)
+            {
+                transform.localScale = new Vector2(-1f, 1f);
+            }
+            else
+            {
+                transform.localScale = new Vector2(1f, 1f);
             }
         }
     }

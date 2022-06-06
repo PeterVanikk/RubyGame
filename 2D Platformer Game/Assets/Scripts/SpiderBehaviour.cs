@@ -45,7 +45,7 @@ public class SpiderBehaviour : MonoBehaviour
         {
             animator.SetBool("isRunning", true);
         }
-        if(!notHitting)
+        if (!notHitting)
         {
             animator.SetBool("isRunning", false);
         }
@@ -104,8 +104,12 @@ public class SpiderBehaviour : MonoBehaviour
             }
         }
         RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, lookDirection, distance);
-        if (wallInfo.collider != null && wallInfo.collider.gameObject.layer == 10)
+        if (wallInfo.collider != null)
         {
+            if (wallInfo.collider.gameObject.CompareTag("player"))
+            {
+                return;
+            }
             if (transform.localScale.x == 1f)
             {
                 transform.localScale = new Vector2(-1f, 1f);
@@ -158,7 +162,7 @@ public class SpiderBehaviour : MonoBehaviour
         }
     }
 
-            public void ChangeHealth(int amount)
+    public void ChangeHealth(int amount)
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         Debug.Log(currentHealth);

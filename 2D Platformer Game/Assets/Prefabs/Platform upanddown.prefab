@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6785587762539064875}
   - component: {fileID: 4035399325543623266}
   - component: {fileID: 3500309815407903307}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: Platform upanddown
   m_TagString: Untagged
   m_Icon: {fileID: 0}

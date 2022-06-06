@@ -8,6 +8,7 @@ TagManager:
   - enemy
   - platform
   - player
+  - movingplatform
   layers:
   - Default
   - TransparentFX

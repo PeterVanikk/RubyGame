@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6785587762539064875}
   - component: {fileID: 4035399325543623266}
   - component: {fileID: -3008873604276617736}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: Platform sidetoside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,4 +148,3 @@ MonoBehaviour:
   speedx: 1.5
   timeUntilFlipx: 1.3
   currentTimex: 0
-  player: {fileID: 8698057089801461919, guid: bee8dca81f44f074e950ebcca449a9fb, type: 3}
