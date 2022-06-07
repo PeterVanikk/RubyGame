@@ -28,6 +28,8 @@ public class MainCharController : MonoBehaviour
 
     public float currentTimeProj;
     public GameObject projectilePrefab;
+    public GameObject bouncyHeadPrefab;
+    public GameObject bouncyGearPrefab;
     public float currentTimeProjectile;
     public float maxTimeProjectile = 0.5f;
     public bool canShoot;
@@ -37,6 +39,7 @@ public class MainCharController : MonoBehaviour
     public float projectileSpeed;
     public float timeBTWShots;
     public float goombaLaunchForce;
+    public bool ballzShot = false;
 
     //health
     public int health { get { return currentHealth; } }
@@ -174,6 +177,20 @@ public class MainCharController : MonoBehaviour
         {
             StartCoroutine(Launch());
         }
+        if (rigidbody2d.position.y <= -6.5)
+        {
+            ChangeHealth(-1);
+            Vector2 movement = new Vector2(rigidbody2d.velocity.x, jumpForce * 1.64f);
+            rigidbody2d.velocity = movement;
+            animator.SetTrigger("Jump");
+        }
+        if (rigidbody2d.position.x >= 65)
+        {
+            if (ballzShot == false)
+            {
+                StartCoroutine(shootBallz());
+            }
+        }
     }
 
     void FixedUpdate()
@@ -260,5 +277,18 @@ public class MainCharController : MonoBehaviour
             return true;
         }
         return false;
+    }
+    IEnumerator shootBallz()
+    {
+        ballzShot = true;
+        GameObject bouncyHead = Instantiate(bouncyHeadPrefab, new Vector2(93.09f, 1.1f), Quaternion.identity);
+        yield return new WaitForSeconds(0.5f);
+        GameObject bouncyGear = Instantiate(bouncyGearPrefab, new Vector2(93.09f, 1.1f), Quaternion.identity);
+        yield return new WaitForSeconds(0.5f);
+        bouncyHead = Instantiate(bouncyHeadPrefab, new Vector2(93.09f, 1.1f), Quaternion.identity);
+        yield return new WaitForSeconds(0.5f);
+        bouncyHead = Instantiate(bouncyHeadPrefab, new Vector2(93.09f, 1.1f), Quaternion.identity);
+        yield return new WaitForSeconds(0.5f);
+        bouncyGear = Instantiate(bouncyGearPrefab, new Vector2(93.09f, 1.1f), Quaternion.identity);
     }
 }

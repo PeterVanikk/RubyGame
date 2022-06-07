@@ -9,6 +9,8 @@ TagManager:
   - platform
   - player
   - movingplatform
+  - spider
+  - ball
   layers:
   - Default
   - TransparentFX
@@ -25,7 +27,7 @@ TagManager:
   - EnemyBackView
   - EnemyProjectile
   - spider
-  - 
+  - bouncyball
   - 
   - 
   - 
