@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 6785587762539064875}
   - component: {fileID: 4035399325543623266}
   - component: {fileID: 3500309815407903307}
-  m_Layer: 3
+  - component: {fileID: 3571489858317458215}
+  m_Layer: 9
   m_Name: Platform upanddown
-  m_TagString: Untagged
+  m_TagString: movingplatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,3 +153,22 @@ MonoBehaviour:
   minHeight: 0
   dropSpeed: 2
   player: {fileID: 0}
+--- !u!251 &3571489858317458215
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6785587762539064874}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
