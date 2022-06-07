@@ -10,12 +10,12 @@ public class bouncingObjects : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        rb2d.AddForce(startForce, ForceMode2D.Impulse);
     }
 
     // Update is called once per frame
     void Update()
     {
+        transform.Translate(Vector2.left * 1.7f * Time.fixedDeltaTime);
         if(rb2d.position.x <= 64.12)
         {
             Destroy(gameObject);

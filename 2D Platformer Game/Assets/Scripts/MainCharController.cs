@@ -281,14 +281,14 @@ public class MainCharController : MonoBehaviour
     IEnumerator shootBallz()
     {
         ballzShot = true;
-        GameObject bouncyHead = Instantiate(bouncyHeadPrefab, new Vector2(93.09f, 1.1f), Quaternion.identity);
+        GameObject bouncyHead = Instantiate(bouncyHeadPrefab, new Vector2(93f, 1.1f), Quaternion.identity);
         yield return new WaitForSeconds(0.5f);
-        GameObject bouncyGear = Instantiate(bouncyGearPrefab, new Vector2(93.09f, 1.1f), Quaternion.identity);
+        GameObject bouncyGear = Instantiate(bouncyGearPrefab, new Vector2(93f, 1.1f), Quaternion.identity);
         yield return new WaitForSeconds(0.5f);
-        bouncyHead = Instantiate(bouncyHeadPrefab, new Vector2(93.09f, 1.1f), Quaternion.identity);
+        bouncyHead = Instantiate(bouncyHeadPrefab, new Vector2(93f, 1.1f), Quaternion.identity);
         yield return new WaitForSeconds(0.5f);
-        bouncyHead = Instantiate(bouncyHeadPrefab, new Vector2(93.09f, 1.1f), Quaternion.identity);
+        bouncyHead = Instantiate(bouncyHeadPrefab, new Vector2(93f, 1.1f), Quaternion.identity);
         yield return new WaitForSeconds(0.5f);
-        bouncyGear = Instantiate(bouncyGearPrefab, new Vector2(93.09f, 1.1f), Quaternion.identity);
+        bouncyGear = Instantiate(bouncyGearPrefab, new Vector2(93f, 1.1f), Quaternion.identity);
     }
 }
