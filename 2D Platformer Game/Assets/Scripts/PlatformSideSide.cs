@@ -11,32 +11,50 @@ public class PlatformSideSide : MonoBehaviour
     public float speedx;
     public float timeUntilFlipx;
     public float currentTimex;
+    public float dropSpeed;
+    public bool countDown;
+    public float maxTimeUntilDrop;
+    public float currentTimeUntilDrop;
+    public float idleHeight;
+    public bool oscillateX;
 
-    //for stick to platform
-
-
+    public GameObject player;
     void Start()
     {
+        oscillateX = true;
         rigidbody2d = GetComponent<Rigidbody2D>();
         currentTimex = timeUntilFlipx;
+        idleHeight = rigidbody2d.position.y;
     }
 
     void Update()
     {
-        if (movingRight)
+        if (oscillateX)
         {
-            transform.Translate(speedx * Vector2.right * Time.deltaTime);
-            currentTimex -= Time.deltaTime;
+            if (movingRight)
+            {
+                transform.Translate(speedx * Vector2.right * Time.deltaTime);
+                currentTimex -= Time.deltaTime;
+            }
+            if (!movingRight)
+            {
+                transform.Translate(speedx * Vector2.left * Time.deltaTime);
+                currentTimex -= Time.deltaTime;
+            }
+            if (currentTimex <= 0)
+            {
+                currentTimex = timeUntilFlipx;
+                movingRight = !movingRight;
+            }
         }
-        if (!movingRight)
+        if (countDown)
         {
-            transform.Translate(speedx * Vector2.left * Time.deltaTime);
-            currentTimex -= Time.deltaTime;
-        }
-        if (currentTimex <= 0)
-        {
-            currentTimex = timeUntilFlipx;
-            movingRight = !movingRight;
+            currentTimeUntilDrop -= Time.deltaTime;
+            if (currentTimeUntilDrop <= 0)
+            {
+                StartCoroutine(Fall());
+                oscillateX = false;
+            }
         }
         /*if (oscillateY)
         {
@@ -68,6 +86,15 @@ public class PlatformSideSide : MonoBehaviour
         effector.rotationalOffset = 0f;
         }*/
     }
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        MainCharController controller = other.gameObject.GetComponent<MainCharController>();
+        if (controller != null)
+        {
+            countDown = true;
+            currentTimeUntilDrop = maxTimeUntilDrop;
+        }
+    }
     public void OnCollisionStay2D(Collision2D other)
     {
         MainCharController controller = other.gameObject.GetComponent<MainCharController>();
@@ -86,6 +113,19 @@ public class PlatformSideSide : MonoBehaviour
     {
         GameObject character = GameObject.FindWithTag("player");
         character.transform.parent = null;
-        // oscillateY = true;
+        countDown = false;
+    }
+    IEnumerator Fall()
+    {
+        if (rigidbody2d.position.y > idleHeight - 7f)
+        {
+            transform.Translate(dropSpeed * 3 * Vector2.down * Time.fixedDeltaTime);
+        }
+        yield return new WaitForSeconds(3);
+        if (rigidbody2d.position.y < idleHeight)
+        {
+            transform.Translate(dropSpeed * 3 * Vector2.up * Time.fixedDeltaTime);
+        }
+        oscillateX = true;
     }
 }

@@ -14,12 +14,14 @@ public class PlatformUpDown : MonoBehaviour
     public float maxHeight;
     public float minHeight;
     public float dropSpeed;
-    public bool raiseNeeded;
+    public bool countDown;
+    public float maxTimeUntilDrop;
+    public float currentTimeUntilDrop;
 
     public GameObject player;
     void Start()
     {
-        raiseNeeded = false;
+        countDown = false;
         rigidbody2d = GetComponent<Rigidbody2D>();
         maxHeight = rigidbody2d.position.y + 0.22f;
         minHeight = rigidbody2d.position.y - 0.22f;
@@ -51,7 +53,7 @@ public class PlatformUpDown : MonoBehaviour
             {
                 movingUp = true;
             }
-            if (movingUp && !raiseNeeded)
+            if (movingUp)
             {
                 transform.Translate(speedy * Vector2.up * Time.deltaTime);
             }
@@ -60,7 +62,15 @@ public class PlatformUpDown : MonoBehaviour
                 transform.Translate(speedy * Vector2.down * Time.deltaTime);
             }
         }
-        if (raiseNeeded)
+        if (countDown)
+        {
+            currentTimeUntilDrop -= Time.deltaTime;
+            if (currentTimeUntilDrop <= 0)
+            {
+                StartCoroutine(Fall());
+            }
+        }
+        /*if (raiseNeeded)
         {
             if (rigidbody2d.position.x < maxHeight - 0.22f)
             {
@@ -72,6 +82,13 @@ public class PlatformUpDown : MonoBehaviour
         {
             raiseNeeded = false;
         }
+        if (dropNeeded)
+        {
+            if (rigidbody2d.position.x >= -8f)
+            {
+                transform.Translate(dropSpeed * 2 * Vector2.down * Time.fixedDeltaTime);
+            }
+        }*/
     }
     /*
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.Space))
@@ -85,6 +102,15 @@ public class PlatformUpDown : MonoBehaviour
         effector.rotationalOffset = 0f;
     }
     */
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        MainCharController controller = other.gameObject.GetComponent<MainCharController>();
+        if (controller != null)
+        {
+            countDown = true;
+            currentTimeUntilDrop = maxTimeUntilDrop;
+        }
+    }
     public void OnCollisionStay2D(Collision2D other)
     {
         MainCharController controller = other.gameObject.GetComponent<MainCharController>();
@@ -96,30 +122,24 @@ public class PlatformUpDown : MonoBehaviour
             {
                 transform.Translate(dropSpeed * Vector2.down * Time.deltaTime);
             }
-            StartCoroutine(timedDrop());
         }
     }
     public void OnCollisionExit2D(Collision2D other)
     {
         player.transform.parent.SetParent(null);
         oscillateY = true;
+        countDown = false;
     }
-
-    IEnumerator timedDrop()
+    IEnumerator Fall()
     {
+        if (rigidbody2d.position.y > minHeight - 7f)
+        {
+            transform.Translate(dropSpeed * 3 * Vector2.down * Time.fixedDeltaTime);
+        }
         yield return new WaitForSeconds(3);
-        if (rigidbody2d.position.x > -8)
+        if (rigidbody2d.position.y <= maxHeight - 0.22f)
         {
-            transform.Translate(dropSpeed * 2 * Vector2.down * Time.fixedDeltaTime);
+            transform.Translate(dropSpeed * 3 * Vector2.up * Time.fixedDeltaTime);
         }
-        if (rigidbody2d.position.y < -7.9)
-        {
-            StartCoroutine(timedRaise());
-        }
-    }
-    IEnumerator timedRaise()
-    {
-        yield return new WaitForSeconds(5);
-        raiseNeeded = true;
     }
 }
