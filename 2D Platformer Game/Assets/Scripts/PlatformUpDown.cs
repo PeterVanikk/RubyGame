@@ -14,10 +14,12 @@ public class PlatformUpDown : MonoBehaviour
     public float maxHeight;
     public float minHeight;
     public float dropSpeed;
+    public bool raiseNeeded;
 
     public GameObject player;
     void Start()
     {
+        raiseNeeded = false;
         rigidbody2d = GetComponent<Rigidbody2D>();
         maxHeight = rigidbody2d.position.y + 0.22f;
         minHeight = rigidbody2d.position.y - 0.22f;
@@ -49,7 +51,7 @@ public class PlatformUpDown : MonoBehaviour
             {
                 movingUp = true;
             }
-            if (movingUp)
+            if (movingUp && !raiseNeeded)
             {
                 transform.Translate(speedy * Vector2.up * Time.deltaTime);
             }
@@ -57,6 +59,18 @@ public class PlatformUpDown : MonoBehaviour
             {
                 transform.Translate(speedy * Vector2.down * Time.deltaTime);
             }
+        }
+        if (raiseNeeded)
+        {
+            if (rigidbody2d.position.x < maxHeight - 0.22f)
+            {
+                Debug.Log("dwa");
+                transform.Translate(dropSpeed * 2 * Vector2.up * Time.fixedDeltaTime);
+            }
+        }
+        if (rigidbody2d.position.x <= maxHeight - 0.22f)
+        {
+            raiseNeeded = false;
         }
     }
     /*
@@ -82,11 +96,30 @@ public class PlatformUpDown : MonoBehaviour
             {
                 transform.Translate(dropSpeed * Vector2.down * Time.deltaTime);
             }
+            StartCoroutine(timedDrop());
         }
     }
     public void OnCollisionExit2D(Collision2D other)
     {
         player.transform.parent.SetParent(null);
         oscillateY = true;
+    }
+
+    IEnumerator timedDrop()
+    {
+        yield return new WaitForSeconds(3);
+        if (rigidbody2d.position.x > -8)
+        {
+            transform.Translate(dropSpeed * 2 * Vector2.down * Time.fixedDeltaTime);
+        }
+        if (rigidbody2d.position.y < -7.9)
+        {
+            StartCoroutine(timedRaise());
+        }
+    }
+    IEnumerator timedRaise()
+    {
+        yield return new WaitForSeconds(5);
+        raiseNeeded = true;
     }
 }
