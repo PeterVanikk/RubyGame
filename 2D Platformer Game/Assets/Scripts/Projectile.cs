@@ -29,10 +29,17 @@ public class Projectile : MonoBehaviour
     {
         if (other.collider.tag == "enemy")
         {
-            SkeletonAI skeleton = other.collider.GetComponent<SkeletonAI>();
-            skeleton.ChangeHealth(-1);
-            BoarBehaviour boar = other.collider.GetComponent<BoarBehaviour>();
-            boar.StartCoroutine()
+            BoarBehaviour bcontroller = other.gameObject.GetComponent<BoarBehaviour>();
+            if (bcontroller != null)
+            {
+                bcontroller.StartCoroutine(bcontroller.DieProcess());
+            }
+            SkeletonAI scontroller = other.gameObject.GetComponent<SkeletonAI>();
+            if (scontroller != null)
+            {
+                scontroller.ChangeHealth(-1);
+            }
+            Destroy(gameObject);
         }
         if (other.collider.tag != "platform")
         {
