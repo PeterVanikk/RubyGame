@@ -151,9 +151,10 @@ MonoBehaviour:
   currentTimex: 0
   dropSpeed: 2
   countDown: 0
-  maxTimeUntilDrop: 3
+  maxTimeUntilDrop: 1
   currentTimeUntilDrop: 0
   idleHeight: 0
+  oscillateX: 0
   player: {fileID: 0}
 --- !u!251 &-6957597163711212107
 PlatformEffector2D:

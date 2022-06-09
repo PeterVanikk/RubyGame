@@ -89,6 +89,10 @@ public class PlatformUpDown : MonoBehaviour
                 transform.Translate(dropSpeed * 2 * Vector2.down * Time.fixedDeltaTime);
             }
         }*/
+        if (rigidbody2d.position.y <= -7.5)
+        {
+            countDown = false;
+        }
     }
     /*
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.Space))
@@ -105,41 +109,55 @@ public class PlatformUpDown : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D other)
     {
         MainCharController controller = other.gameObject.GetComponent<MainCharController>();
-        if (controller != null)
+        if (controller == null)
         {
-            countDown = true;
-            currentTimeUntilDrop = maxTimeUntilDrop;
+            return;
         }
+        countDown = true;
+        currentTimeUntilDrop = maxTimeUntilDrop;
     }
     public void OnCollisionStay2D(Collision2D other)
     {
         MainCharController controller = other.gameObject.GetComponent<MainCharController>();
-        if (controller != null)
+        if (controller == null)
         {
-            player.transform.SetParent(this.transform);
-            oscillateY = false;
-            if (rigidbody2d.position.y > minHeight && other.gameObject.GetComponent<MainCharController>().IsGrounded())
-            {
-                transform.Translate(dropSpeed * Vector2.down * Time.deltaTime);
-            }
+            return;
+        }
+        player.transform.SetParent(this.transform);
+        oscillateY = false;
+        if (rigidbody2d.position.y > minHeight && other.gameObject.GetComponent<MainCharController>().IsGrounded())
+        {
+            transform.Translate(dropSpeed * Vector2.down * Time.deltaTime);
         }
     }
     public void OnCollisionExit2D(Collision2D other)
     {
-        player.transform.parent.SetParent(null);
-        oscillateY = true;
-        countDown = false;
+        MainCharController controller = other.gameObject.GetComponent<MainCharController>();
+        if (controller == null)
+        {
+            return;
+        }
+        player.transform.SetParent(null);
+        if (rigidbody2d.position.y >= minHeight - 0.2f)
+        {
+            oscillateY = true;
+            countDown = false;
+        }
     }
     IEnumerator Fall()
     {
         if (rigidbody2d.position.y > minHeight - 7f)
         {
-            transform.Translate(dropSpeed * 3 * Vector2.down * Time.fixedDeltaTime);
+            transform.Translate(dropSpeed * 1.5f * Vector2.down * Time.fixedDeltaTime);
         }
         yield return new WaitForSeconds(3);
         if (rigidbody2d.position.y <= maxHeight - 0.22f)
         {
-            transform.Translate(dropSpeed * 3 * Vector2.up * Time.fixedDeltaTime);
+            transform.Translate(dropSpeed * 1.5f * Vector2.up * Time.fixedDeltaTime);
+        }
+        if (rigidbody2d.position.y >= minHeight - 0.22f)
+        {
+            oscillateY = true;
         }
     }
 }

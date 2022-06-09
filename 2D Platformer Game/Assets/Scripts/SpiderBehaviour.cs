@@ -182,8 +182,14 @@ public class SpiderBehaviour : MonoBehaviour
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.GetComponent<CircleCollider2D>().enabled = false;
         enabled = false;
-        yield return new WaitForSeconds(6);
-        gameObject.SetActive(false);
+        yield return new WaitForSeconds(4.5f);
+        animator.SetTrigger("Revive");
+        yield return new WaitForSeconds(0.8f);
+        enabled = true;
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        gameObject.GetComponent<CircleCollider2D>().enabled = true;
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+
     }
     IEnumerator flipLeft()
     {

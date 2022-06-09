@@ -31,6 +31,8 @@ public class Projectile : MonoBehaviour
         {
             SkeletonAI skeleton = other.collider.GetComponent<SkeletonAI>();
             skeleton.ChangeHealth(-1);
+            BoarBehaviour boar = other.collider.GetComponent<BoarBehaviour>();
+            boar.StartCoroutine()
         }
         if (other.collider.tag != "platform")
         {

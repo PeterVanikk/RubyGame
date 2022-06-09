@@ -17,6 +17,7 @@ public class PlatformSideSide : MonoBehaviour
     public float currentTimeUntilDrop;
     public float idleHeight;
     public bool oscillateX;
+    public bool isFalling;
 
     public GameObject player;
     void Start()
@@ -112,20 +113,28 @@ public class PlatformSideSide : MonoBehaviour
     public void OnCollisionExit2D(Collision2D other)
     {
         GameObject character = GameObject.FindWithTag("player");
-        character.transform.parent = null;
-        countDown = false;
+        player.transform.SetParent(null);
+        if (!isFalling)
+        {
+            countDown = false;
+        }
     }
     IEnumerator Fall()
     {
+        isFalling = true;
         if (rigidbody2d.position.y > idleHeight - 7f)
         {
-            transform.Translate(dropSpeed * 3 * Vector2.down * Time.fixedDeltaTime);
+            transform.Translate(dropSpeed * 1.5f * Vector2.down * Time.fixedDeltaTime);
         }
         yield return new WaitForSeconds(3);
         if (rigidbody2d.position.y < idleHeight)
         {
-            transform.Translate(dropSpeed * 3 * Vector2.up * Time.fixedDeltaTime);
+            transform.Translate(dropSpeed * 1.5f * Vector2.up * Time.fixedDeltaTime);
         }
-        oscillateX = true;
+        if (rigidbody2d.position.y == idleHeight)
+        {
+            isFalling = false;
+            oscillateX = true;
+        }
     }
 }
