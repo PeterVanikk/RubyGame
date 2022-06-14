@@ -17,7 +17,6 @@ public class PlatformSideSide : MonoBehaviour
     public float currentTimeUntilDrop;
     public float idleHeight;
     public bool oscillateX;
-    public bool isFalling;
 
     public GameObject player;
     void Start()
@@ -86,54 +85,65 @@ public class PlatformSideSide : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         effector.rotationalOffset = 0f;
         }*/
+        if(rigidbody2d.position.y <= -7.5)
+        {
+            countDown = false;
+        }
     }
     public void OnCollisionEnter2D(Collision2D other)
     {
         MainCharController controller = other.gameObject.GetComponent<MainCharController>();
-        if (controller != null)
+        if (controller == null)
         {
-            countDown = true;
-            currentTimeUntilDrop = maxTimeUntilDrop;
+            return;
         }
+        countDown = true;
+        currentTimeUntilDrop = maxTimeUntilDrop;
     }
     public void OnCollisionStay2D(Collision2D other)
     {
         MainCharController controller = other.gameObject.GetComponent<MainCharController>();
-        if (controller != null)
+        if (controller == null)
         {
-            GameObject character = GameObject.FindWithTag("player");
-            character.transform.SetParent(this.transform);
-            /*oscillateY = false;
-            if (rigidbody2d.position.y > minHeight && other.gameObject.GetComponent<MainCharController>().IsGrounded())
-            {
-                transform.Translate(dropSpeed * Vector2.down * Time.deltaTime);
-            }*/
+            return;
         }
+        player.transform.SetParent(this.transform);
+        GameObject character = GameObject.FindWithTag("player");
+        oscillateX = false;
+        /*oscillateY = false;
+        if (rigidbody2d.position.y > minHeight && other.gameObject.GetComponent<MainCharController>().IsGrounded())
+        {
+            transform.Translate(dropSpeed * Vector2.down * Time.deltaTime);
+        }*/
+
     }
     public void OnCollisionExit2D(Collision2D other)
     {
-        GameObject character = GameObject.FindWithTag("player");
-        player.transform.SetParent(null);
-        if (!isFalling)
+        MainCharController controller = other.gameObject.GetComponent<MainCharController>();
+        if (controller == null)
         {
+            return;
+        }
+        player.transform.SetParent(null);
+        if (rigidbody2d.position.y >= idleHeight-0.5f)
+        {
+            oscillateX = true;
             countDown = false;
         }
     }
     IEnumerator Fall()
     {
-        isFalling = true;
         if (rigidbody2d.position.y > idleHeight - 7f)
         {
             transform.Translate(dropSpeed * 1.5f * Vector2.down * Time.fixedDeltaTime);
         }
         yield return new WaitForSeconds(3);
-        if (rigidbody2d.position.y < idleHeight)
+        if (rigidbody2d.position.y <= idleHeight)
         {
             transform.Translate(dropSpeed * 1.5f * Vector2.up * Time.fixedDeltaTime);
         }
-        if (rigidbody2d.position.y == idleHeight)
+        if (rigidbody2d.position.y >= idleHeight-0.5f)
         {
-            isFalling = false;
             oscillateX = true;
         }
     }

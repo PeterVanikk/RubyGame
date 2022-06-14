@@ -116,7 +116,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 785508784142841579}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 054d969ecbe8d254d964353f59725f6c, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -164,7 +164,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 6
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -183,12 +183,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallCheck: {fileID: 3297012681068433223}
-  speed: 4
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  speed: 3.2
   run: 1
   slowDown: 0
   distance: 0.2
   jumpForcex: 2
-  jumpForce: 10
+  jumpForce: 7
+  jumpComplete: 0
 --- !u!1 &2567679725781254744
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +205,7 @@ GameObject:
   m_Layer: 10
   m_Name: WallChk
   m_TagString: Untagged
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -213,7 +217,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2567679725781254744}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.244, y: -0.145, z: 0}
+  m_LocalPosition: {x: 1.01, y: -0.145, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 785508784142841590}

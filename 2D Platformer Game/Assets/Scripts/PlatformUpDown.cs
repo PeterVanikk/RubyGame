@@ -17,6 +17,7 @@ public class PlatformUpDown : MonoBehaviour
     public bool countDown;
     public float maxTimeUntilDrop;
     public float currentTimeUntilDrop;
+    public bool isFalling;
 
     public GameObject player;
     void Start()
@@ -146,6 +147,7 @@ public class PlatformUpDown : MonoBehaviour
     }
     IEnumerator Fall()
     {
+        isFalling = true;
         if (rigidbody2d.position.y > minHeight - 7f)
         {
             transform.Translate(dropSpeed * 1.5f * Vector2.down * Time.fixedDeltaTime);
@@ -157,6 +159,7 @@ public class PlatformUpDown : MonoBehaviour
         }
         if (rigidbody2d.position.y >= minHeight - 0.22f)
         {
+            isFalling = false;
             oscillateY = true;
         }
     }

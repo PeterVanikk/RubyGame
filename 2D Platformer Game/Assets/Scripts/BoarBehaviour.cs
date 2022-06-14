@@ -41,7 +41,8 @@ public class BoarBehaviour : MonoBehaviour
         RaycastHit2D wallInfo = Physics2D.Raycast(wallCheck.position, lookDirection, distance, GroundLayers);
         if (wallInfo.collider != null)
         {
-                StartCoroutine(jumpOverStep());
+            StartCoroutine(jumpOverStep());
+            return;
         }
     }
     public IEnumerator DieProcess()
@@ -66,11 +67,15 @@ public class BoarBehaviour : MonoBehaviour
     }
     IEnumerator jumpOverStep()
     {
-        run = false;
+        animator.SetBool("isRunning", false);
         animator.SetBool("Idle", true);
+        run = false;
         yield return new WaitForSeconds(0.5f);
-        Vector2 jump = new Vector2(jumpForcex * transform.localScale.x, jumpForce);
+        animator.SetTrigger("Jump");
+        animator.SetBool("Idle", false);
+        Vector2 jump = new Vector2(0, jumpForce);
         rigidbody2d.velocity = jump;
+        transform.Translate(speed * 0.43f * Vector2.right * Time.fixedDeltaTime);
         yield return new WaitForSeconds(0.5f);
         animator.SetBool("isRunning", true);
         run = true;
