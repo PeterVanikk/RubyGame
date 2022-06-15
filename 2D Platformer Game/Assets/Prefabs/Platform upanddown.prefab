@@ -155,6 +155,7 @@ MonoBehaviour:
   countDown: 0
   maxTimeUntilDrop: 0.5
   currentTimeUntilDrop: 0
+  isFalling: 0
   player: {fileID: 0}
 --- !u!251 &3571489858317458215
 PlatformEffector2D:

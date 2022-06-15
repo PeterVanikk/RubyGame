@@ -112,7 +112,7 @@ public class MainCharController : MonoBehaviour
         if (Input.GetKey(KeyCode.J))
         {
             nodash = true;
-            if (rigidbody2d.velocity.y == 0)
+            if (IsGrounded())
             {
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
                 animator.SetBool("isRunning", false);
@@ -195,8 +195,11 @@ public class MainCharController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 movement = new Vector2(horizontal * speed, rigidbody2d.velocity.y);
-        rigidbody2d.velocity = movement;
+        if (!dashActive)
+        {
+            Vector2 movement = new Vector2(horizontal * speed, rigidbody2d.velocity.y);
+            rigidbody2d.velocity = movement;
+        }
     }
     void Jump()
     {
@@ -220,8 +223,8 @@ public class MainCharController : MonoBehaviour
         {
             return;
         }
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-        Vector2 movement = new Vector2(dashForce * transform.localScale.x, 0.0f);
+        //GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        Vector2 movement = new Vector2(dashForce * transform.localScale.x, 0);
         rigidbody2d.velocity = movement;
         //rigidbody2d.AddForce(movement * lookDirection);
 

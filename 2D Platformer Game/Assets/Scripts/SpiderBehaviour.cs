@@ -106,7 +106,7 @@ public class SpiderBehaviour : MonoBehaviour
         RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, lookDirection, distance);
         if (wallInfo.collider != null)
         {
-            if (wallInfo.collider.gameObject.CompareTag("player") || wallInfo.collider.gameObject.CompareTag("spider") || wallInfo.collider.gameObject.CompareTag("ball"))
+            if (wallInfo.collider.gameObject.CompareTag("player") || wallInfo.collider.gameObject.CompareTag("spider") || wallInfo.collider.gameObject.CompareTag("ball") || wallInfo.collider.gameObject.CompareTag("Projectile"))
             {
                 return;
             }

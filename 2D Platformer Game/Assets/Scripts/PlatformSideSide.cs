@@ -109,7 +109,6 @@ public class PlatformSideSide : MonoBehaviour
         }
         player.transform.SetParent(this.transform);
         GameObject character = GameObject.FindWithTag("player");
-        oscillateX = false;
         /*oscillateY = false;
         if (rigidbody2d.position.y > minHeight && other.gameObject.GetComponent<MainCharController>().IsGrounded())
         {
@@ -133,6 +132,7 @@ public class PlatformSideSide : MonoBehaviour
     }
     IEnumerator Fall()
     {
+        oscillateX = false;
         if (rigidbody2d.position.y > idleHeight - 7f)
         {
             transform.Translate(dropSpeed * 1.5f * Vector2.down * Time.fixedDeltaTime);
