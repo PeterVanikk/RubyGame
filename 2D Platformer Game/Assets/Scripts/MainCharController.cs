@@ -221,8 +221,9 @@ public class MainCharController : MonoBehaviour
             return;
         }
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-        Vector2 movement = new Vector2(dashForce, 0.0f);
-        rigidbody2d.AddForce(movement * lookDirection);
+        Vector2 movement = new Vector2(dashForce * transform.localScale.x, 0.0f);
+        rigidbody2d.velocity = movement;
+        //rigidbody2d.AddForce(movement * lookDirection);
 
         animator.SetBool("isDashing", true);
     }
