@@ -9,15 +9,17 @@ public class BoarBehaviour : MonoBehaviour
 
     Vector2 lookDirection = new Vector2(1, 0);
     public Transform wallCheck;
+    public Transform groundDetection;
     public LayerMask GroundLayers;
+    public LayerMask platformLayers;
 
     public float speed;
-    public bool run;
     public bool slowDown = false;
     public float distance;
     public float jumpForcex;
     public float jumpForce;
     public bool jumpComplete;
+    public bool alreadyJumped;
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -28,11 +30,8 @@ public class BoarBehaviour : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if (run)
-        {
-            Vector2 movement = new Vector2(transform.localScale.x * speed, rigidbody2d.velocity.y);
-            rigidbody2d.velocity = movement;
-        }
+        Vector2 movement = new Vector2(transform.localScale.x * speed, rigidbody2d.velocity.y);
+        rigidbody2d.velocity = movement;
         if (slowDown)
         {
             speed -= Time.deltaTime;
@@ -41,8 +40,20 @@ public class BoarBehaviour : MonoBehaviour
         RaycastHit2D wallInfo = Physics2D.Raycast(wallCheck.position, lookDirection, distance, GroundLayers);
         if (wallInfo.collider != null)
         {
-            StartCoroutine(jumpOverStep());
-            return;
+            if (!alreadyJumped)
+            {
+                StartCoroutine(jumpOverStep());
+                alreadyJumped = true;
+            }
+        }
+        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance, GroundLayers);
+        if (groundInfo.collider == false && rigidbody2d.velocity.y == 0)
+        {
+            if(!alreadyJumped)
+            {
+                StartCoroutine(jumpOverStep());
+                alreadyJumped = true;
+            }
         }
     }
     public IEnumerator DieProcess()
@@ -69,15 +80,16 @@ public class BoarBehaviour : MonoBehaviour
     {
         animator.SetBool("isRunning", false);
         animator.SetBool("Idle", true);
-        run = false;
+        speed = 0;
         yield return new WaitForSeconds(0.5f);
         animator.SetTrigger("Jump");
         animator.SetBool("Idle", false);
-        Vector2 jump = new Vector2(0, jumpForce);
-        rigidbody2d.velocity = jump;
-        transform.Translate(speed * 0.43f * Vector2.right * Time.fixedDeltaTime);
-        yield return new WaitForSeconds(0.5f);
+        Vector2 jumpVector = new Vector2(0, 1);
+        rigidbody2d.AddForce(jumpForce * jumpVector);
+        speed = 5;
+        yield return new WaitForSeconds(0.9f);
         animator.SetBool("isRunning", true);
-        run = true;
+        speed = 3.2f;
+        alreadyJumped = false;
     }
 }
