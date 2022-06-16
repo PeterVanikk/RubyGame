@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &239656397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 239656398}
+  m_Layer: 10
+  m_Name: WallChk
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &239656398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239656397}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.11, y: -0.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8822883074441825264}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2120694278
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,6 +127,7 @@ Transform:
   - {fileID: 8822883074976986198}
   - {fileID: 8822883074160986006}
   - {fileID: 2120694279}
+  - {fileID: 239656398}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -240,6 +271,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3336712504284566725, guid: 79ed3a25fe1f47c4cba9c15799c873b4, type: 3}
   shootPoint: {fileID: 2120694279}
   player: {fileID: 0}
+  wallDetection: {fileID: 239656398}
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 8
   maxHealth: 5
 --- !u!58 &690974254
 CircleCollider2D:

@@ -307,7 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpForce: 18.3
-  dashForce: 1700
+  dashForce: 30
   feet: {fileID: 2102407894088263645}
   groundLayers:
     serializedVersion: 2
@@ -326,8 +326,8 @@ MonoBehaviour:
   dashSpeed: 10
   currentTimeProj: 0
   projectilePrefab: {fileID: 3336712504284566725, guid: 9610a524e37580940b25ea580cea4a8b, type: 3}
-  bouncyHeadPrefab: {fileID: 0}
-  bouncyGearPrefab: {fileID: 0}
+  bouncyHeadPrefab: {fileID: 5659009282256872882, guid: edaaa620fc1649a47b27abcb65157891, type: 3}
+  bouncyGearPrefab: {fileID: 3532029052754586951, guid: dbe9c57c56cb61444ad0fff4fa217277, type: 3}
   currentTimeProjectile: 0
   maxTimeProjectile: 0.38
   canShoot: 0

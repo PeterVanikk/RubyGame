@@ -21,6 +21,7 @@ public class SkeletonAI : MonoBehaviour
     public Transform shootPoint;
     public Transform player;
     public Transform wallDetection;
+    public LayerMask groundLayers;
 
     Vector2 lookDirection = new Vector2(1, 0);
 
@@ -95,7 +96,7 @@ public class SkeletonAI : MonoBehaviour
                 alive = false;
             }
         }
-        RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, lookDirection, 0.2f);
+        RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, lookDirection, 0.2f, groundLayers);
         if (wallInfo.collider != null)
         {
             if (wallInfo.collider.gameObject.CompareTag("player"))

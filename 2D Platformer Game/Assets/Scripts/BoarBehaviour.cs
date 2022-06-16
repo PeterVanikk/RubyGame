@@ -60,7 +60,7 @@ public class BoarBehaviour : MonoBehaviour
     {
         slowDown = true;
         animator.SetTrigger("Die");
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3.2f);
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.GetComponent<CircleCollider2D>().enabled = false;
@@ -86,7 +86,7 @@ public class BoarBehaviour : MonoBehaviour
         animator.SetBool("Idle", false);
         Vector2 jumpVector = new Vector2(0, 1);
         rigidbody2d.AddForce(jumpForce * jumpVector);
-        speed = 5;
+        speed = 6;
         yield return new WaitForSeconds(0.9f);
         animator.SetBool("isRunning", true);
         speed = 3.2f;

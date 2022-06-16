@@ -52,7 +52,7 @@ public class SpiderBehaviour : MonoBehaviour
         distToPlayer = Vector2.Distance(transform.position, player.position);
         if (distToPlayer <= range && player.position.y + 2.0f > transform.position.y)
         {
-            if (player.position.y - 2.0f < transform.position.y)
+            if (player.position.y - 1.5f < transform.position.y)
             {
                 //noplayer = false;
                 if (player.position.x > transform.position.x && transform.localScale.x < 0)
@@ -76,7 +76,7 @@ public class SpiderBehaviour : MonoBehaviour
             transform.Translate(lookDirection * speed * Time.deltaTime);
         }
 
-        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
+        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance, groundLayers);
         if (groundInfo.collider == false)
         {
             if (distToPlayer <= range && player.position.y <= transform.position.y - 1.0f && IsGrounded())
@@ -103,13 +103,9 @@ public class SpiderBehaviour : MonoBehaviour
                 alive = false;
             }
         }
-        RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, lookDirection, distance);
+        RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, lookDirection, distance, groundLayers);
         if (wallInfo.collider != null)
         {
-            if (wallInfo.collider.gameObject.CompareTag("player") || wallInfo.collider.gameObject.CompareTag("spider") || wallInfo.collider.gameObject.CompareTag("ball") || wallInfo.collider.gameObject.CompareTag("Projectile"))
-            {
-                return;
-            }
             if (transform.localScale.x == 1f)
             {
                 transform.localScale = new Vector2(-1f, 1f);

@@ -28,8 +28,8 @@ TagManager:
   - EnemyProjectile
   - spider
   - bouncyball
-  - 
-  - 
+  - CameraBounds
+  - playerBounds
   - 
   - 
   - 
