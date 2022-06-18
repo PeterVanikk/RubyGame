@@ -328,6 +328,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3336712504284566725, guid: 9610a524e37580940b25ea580cea4a8b, type: 3}
   bouncyHeadPrefab: {fileID: 5659009282256872882, guid: edaaa620fc1649a47b27abcb65157891, type: 3}
   bouncyGearPrefab: {fileID: 3532029052754586951, guid: dbe9c57c56cb61444ad0fff4fa217277, type: 3}
+  boarPrefab: {fileID: 785508784142841579, guid: 5f09380bad963d04abf64cbc1bb1dc8a, type: 3}
   currentTimeProjectile: 0
   maxTimeProjectile: 0.38
   canShoot: 0

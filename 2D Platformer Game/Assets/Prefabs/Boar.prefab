@@ -221,7 +221,7 @@ MonoBehaviour:
   platformLayers:
     serializedVersion: 2
     m_Bits: 512
-  speed: 3.2
+  speed: 3.3
   slowDown: 0
   distance: 0.08
   jumpForcex: 2

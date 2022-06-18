@@ -22,6 +22,7 @@ public class BoarBehaviour : MonoBehaviour
     public bool alreadyJumped;
     void Start()
     {
+        transform.localScale = new Vector2(-1, 1);
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         lookDirection.Set(transform.localScale.x, 0f);

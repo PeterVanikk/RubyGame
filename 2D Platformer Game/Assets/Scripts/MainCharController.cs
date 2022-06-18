@@ -30,6 +30,7 @@ public class MainCharController : MonoBehaviour
     public GameObject projectilePrefab;
     public GameObject bouncyHeadPrefab;
     public GameObject bouncyGearPrefab;
+    public GameObject boarPrefab;
     public float currentTimeProjectile;
     public float maxTimeProjectile = 0.5f;
     public bool canShoot;
@@ -40,6 +41,9 @@ public class MainCharController : MonoBehaviour
     public float timeBTWShots;
     public float goombaLaunchForce;
     public bool ballzShot = false;
+    public bool alreadySpawned1;
+    public bool alreadySpawned2;
+    public bool alreadySpawned3;
 
     //health
     public int health { get { return currentHealth; } }
@@ -190,6 +194,18 @@ public class MainCharController : MonoBehaviour
             {
                 StartCoroutine(shootBallz());
             }
+        }
+        if(rigidbody2d.position.x > -24 && !alreadySpawned1)
+        {
+            Vector2 boarPosition = new Vector2(-10.97f, -4.48f);
+            GameObject boarEnemy = Instantiate(boarPrefab, boarPosition, Quaternion.identity);
+            alreadySpawned1 = true;
+        }
+        if(rigidbody2d.position.x > -19 && !alreadySpawned2)
+        {
+            Vector2 boarPosition = new Vector2(-10.97f, -4.48f);
+            GameObject boarEnemy = Instantiate(boarPrefab, boarPosition, Quaternion.identity);
+            alreadySpawned2 = true;
         }
     }
 
