@@ -76,8 +76,8 @@ public class SkeletonAI : MonoBehaviour
             transform.Translate(lookDirection * speed * Time.deltaTime);
         }
 
-        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
-        if (groundInfo.collider == false)
+        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance, groundLayers);
+        if (groundInfo.collider == null)
         {
             if (transform.localScale.x == 1f)
             {

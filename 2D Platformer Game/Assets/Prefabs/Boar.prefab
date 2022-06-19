@@ -41,10 +41,10 @@ GameObject:
   - component: {fileID: 785508784142841590}
   - component: {fileID: 785508784142841589}
   - component: {fileID: 785508784142841588}
-  - component: {fileID: 1103502896336861906}
   - component: {fileID: 547726539973366737}
   - component: {fileID: 6162770215011286483}
   - component: {fileID: 1304027424641612673}
+  - component: {fileID: 2015906864}
   m_Layer: 10
   m_Name: Boar
   m_TagString: enemy
@@ -61,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 785508784142841579}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.39, y: -4.49, z: 0}
-  m_LocalScale: {x: 1.1197, y: 1.1197, z: 1.1197}
+  m_LocalScale: {x: -1.1197, y: 1.1197, z: 1.1197}
   m_Children:
   - {fileID: 3297012681068433223}
   - {fileID: 2044726729}
@@ -138,32 +138,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &1103502896336861906
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785508784142841579}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 054d969ecbe8d254d964353f59725f6c, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.24336815, y: -0.16224533}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 1.28}
-    newSize: {x: 2, y: 1.28}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.0360718, y: 0.9555093}
-  m_EdgeRadius: 0
 --- !u!58 &547726539973366737
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -228,6 +202,22 @@ MonoBehaviour:
   jumpForce: 1200
   jumpComplete: 0
   alreadyJumped: 0
+--- !u!58 &2015906864
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785508784142841579}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 054d969ecbe8d254d964353f59725f6c, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.23059231, y: -0.13391408}
+  serializedVersion: 2
+  m_Radius: 0.4899863
 --- !u!1 &2567679725781254744
 GameObject:
   m_ObjectHideFlags: 0
