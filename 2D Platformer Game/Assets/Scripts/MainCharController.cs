@@ -29,6 +29,7 @@ public class MainCharController : MonoBehaviour
     public float currentTimeProj;
     public GameObject projectilePrefab;
     public GameObject boarPrefab;
+    public GameObject boarPrefabRight;
     public float currentTimeProjectile;
     public float maxTimeProjectile = 0.5f;
     public bool canShoot;
@@ -41,6 +42,8 @@ public class MainCharController : MonoBehaviour
     public bool alreadySpawned1;
     public bool alreadySpawned2;
     public bool alreadySpawned3;
+    public float boarSpawnTimer;
+    public float currentBoarTimer;
 
     //health
     public int health { get { return currentHealth; } }
@@ -185,23 +188,33 @@ public class MainCharController : MonoBehaviour
             rigidbody2d.velocity = movement;
             animator.SetTrigger("Jump");
         }
-        if(rigidbody2d.position.x > -24 && !alreadySpawned1)
+        if (rigidbody2d.position.x > -24 && !alreadySpawned1)
         {
             Vector2 boarPosition = new Vector2(-10.97f, -4.48f);
             GameObject boarEnemy = Instantiate(boarPrefab, boarPosition, Quaternion.identity);
             alreadySpawned1 = true;
         }
-        if(rigidbody2d.position.x > -19 && !alreadySpawned2)
+        if (rigidbody2d.position.x > -19 && !alreadySpawned2)
         {
             Vector2 boarPosition = new Vector2(1.38f, -4.48f);
             GameObject boarEnemy = Instantiate(boarPrefab, boarPosition, Quaternion.identity);
             alreadySpawned2 = true;
         }
-        if(rigidbody2d.position.x > -5 && !alreadySpawned3)
+        if (rigidbody2d.position.x > -5 && !alreadySpawned3)
         {
             Vector2 boarPosition = new Vector2(17.91f, -1.71f);
             GameObject boarEnemy = Instantiate(boarPrefab, boarPosition, Quaternion.identity);
             alreadySpawned3 = true;
+        }
+        if (transform.position.x < -10)
+        {
+            currentBoarTimer -= Time.deltaTime;
+            if (currentBoarTimer <= 0)
+            {
+                Vector2 boarPosition = new Vector2(-42.31f, -4.44f);
+                GameObject boarEnemy = Instantiate(boarPrefabRight, boarPosition, Quaternion.identity);
+                currentBoarTimer = boarSpawnTimer;
+            }
         }
     }
 
@@ -294,4 +307,5 @@ public class MainCharController : MonoBehaviour
         }
         return false;
     }
+
 }

@@ -52,29 +52,24 @@ public class SkeletonAI : MonoBehaviour
         MainCharController controller = gameObject.GetComponent<MainCharController>();
         if (distToPlayer <= range)
         {
-            if (controller.IsGrounded())
+            if (player.position.y >= transform.position.y - 1.0f && player.position.y <= transform.position.y + 1.0f)
             {
-                if (player.position.y <= transform.position.y - 1.0f || player.position.y >= transform.position.y + 1.0f)
+                noplayer = false;
+                if (player.position.x > transform.position.x && transform.localScale.x < 0)
                 {
-                    Debug.Log("good");
-                    return;
+                    StartCoroutine(flipRight());
+                }
+                if (player.position.x < transform.position.x && transform.localScale.x > 0)
+                {
+                    StartCoroutine(flipLeft());
+                }
+                if(canShoot)
+                {
+                    StartCoroutine(Shoot());
                 }
             }
-            noplayer = false;
-            if (player.position.x > transform.position.x && transform.localScale.x < 0)
-            {
-                StartCoroutine(flipRight());
-            }
-            if (player.position.x < transform.position.x && transform.localScale.x > 0)
-            {
-                StartCoroutine(flipLeft());
-            }
-            if (canShoot)
-            {
-                StartCoroutine(Shoot());
-            }
         }
-        else
+        if (distToPlayer > range)
         {
             StartCoroutine(noPlayerTrue());
         }
