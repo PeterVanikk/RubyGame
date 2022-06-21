@@ -28,8 +28,6 @@ public class MainCharController : MonoBehaviour
 
     public float currentTimeProj;
     public GameObject projectilePrefab;
-    public GameObject bouncyHeadPrefab;
-    public GameObject bouncyGearPrefab;
     public GameObject boarPrefab;
     public float currentTimeProjectile;
     public float maxTimeProjectile = 0.5f;
@@ -40,7 +38,6 @@ public class MainCharController : MonoBehaviour
     public float projectileSpeed;
     public float timeBTWShots;
     public float goombaLaunchForce;
-    public bool ballzShot = false;
     public bool alreadySpawned1;
     public bool alreadySpawned2;
     public bool alreadySpawned3;
@@ -188,13 +185,6 @@ public class MainCharController : MonoBehaviour
             rigidbody2d.velocity = movement;
             animator.SetTrigger("Jump");
         }
-        if (rigidbody2d.position.x >= 65)
-        {
-            if (ballzShot == false)
-            {
-                StartCoroutine(shootBallz());
-            }
-        }
         if(rigidbody2d.position.x > -24 && !alreadySpawned1)
         {
             Vector2 boarPosition = new Vector2(-10.97f, -4.48f);
@@ -203,9 +193,15 @@ public class MainCharController : MonoBehaviour
         }
         if(rigidbody2d.position.x > -19 && !alreadySpawned2)
         {
-            Vector2 boarPosition = new Vector2(-10.97f, -4.48f);
+            Vector2 boarPosition = new Vector2(1.38f, -4.48f);
             GameObject boarEnemy = Instantiate(boarPrefab, boarPosition, Quaternion.identity);
             alreadySpawned2 = true;
+        }
+        if(rigidbody2d.position.x > -5 && !alreadySpawned3)
+        {
+            Vector2 boarPosition = new Vector2(17.91f, -1.71f);
+            GameObject boarEnemy = Instantiate(boarPrefab, boarPosition, Quaternion.identity);
+            alreadySpawned3 = true;
         }
     }
 
@@ -297,18 +293,5 @@ public class MainCharController : MonoBehaviour
             return true;
         }
         return false;
-    }
-    IEnumerator shootBallz()
-    {
-        ballzShot = true;
-        GameObject bouncyHead = Instantiate(bouncyHeadPrefab, new Vector2(93f, 1.1f), Quaternion.identity);
-        yield return new WaitForSeconds(0.5f);
-        GameObject bouncyGear = Instantiate(bouncyGearPrefab, new Vector2(93f, 1.1f), Quaternion.identity);
-        yield return new WaitForSeconds(0.5f);
-        bouncyHead = Instantiate(bouncyHeadPrefab, new Vector2(93f, 1.1f), Quaternion.identity);
-        yield return new WaitForSeconds(0.5f);
-        bouncyHead = Instantiate(bouncyHeadPrefab, new Vector2(93f, 1.1f), Quaternion.identity);
-        yield return new WaitForSeconds(0.5f);
-        bouncyGear = Instantiate(bouncyGearPrefab, new Vector2(93f, 1.1f), Quaternion.identity);
     }
 }

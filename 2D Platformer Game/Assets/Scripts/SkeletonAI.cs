@@ -49,8 +49,17 @@ public class SkeletonAI : MonoBehaviour
             animator.SetBool("isRunning", false);
         }
         distToPlayer = Vector2.Distance(transform.position, player.position);
-        if (distToPlayer <= range && player.position.y >= transform.position.y - 1.0f && player.position.y <= transform.position.y + 1.0f)
+        MainCharController controller = gameObject.GetComponent<MainCharController>();
+        if (distToPlayer <= range)
         {
+            if (controller.IsGrounded())
+            {
+                if (player.position.y <= transform.position.y - 1.0f || player.position.y >= transform.position.y + 1.0f)
+                {
+                    Debug.Log("good");
+                    return;
+                }
+            }
             noplayer = false;
             if (player.position.x > transform.position.x && transform.localScale.x < 0)
             {
