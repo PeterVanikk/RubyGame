@@ -206,7 +206,7 @@ public class MainCharController : MonoBehaviour
             GameObject boarEnemy = Instantiate(boarPrefab, boarPosition, Quaternion.identity);
             alreadySpawned3 = true;
         }
-        if (transform.position.x < -10)
+        if (transform.position.x < 4)
         {
             currentBoarTimer -= Time.deltaTime;
             if (currentBoarTimer <= 0)
