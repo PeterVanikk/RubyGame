@@ -20,6 +20,7 @@ public class BoarBehaviour : MonoBehaviour
     public float jumpForce;
     public bool jumpComplete;
     public bool alreadyJumped;
+    public bool hitAllowed = true;
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -64,16 +65,20 @@ public class BoarBehaviour : MonoBehaviour
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.GetComponent<CircleCollider2D>().enabled = false;
-        enabled = false;
+        hitAllowed = false;
         yield return new WaitForSeconds(4.5f);
         Destroy(gameObject);
+        enabled = false;
     }
     public void OnCollisionStay2D(Collision2D other)
     {
-        MainCharController controller = other.gameObject.GetComponent<MainCharController>();
-        if (controller != null)
+        if (hitAllowed)
         {
-            controller.ChangeHealth(-1);
+            MainCharController controller = other.gameObject.GetComponent<MainCharController>();
+            if (controller != null)
+            {
+                controller.ChangeHealth(-1);
+            }
         }
     }
     IEnumerator jumpOverStep()
